@@ -4,8 +4,6 @@ const landlordController = require("../controllers/landlordController")
 
 
 
-router.get("/:id", landlordController.getReviews, (req, res)=>{ 
+router.get("/:id", landlordController.getReviews)
 
-
-
-})
+router.post("/", landlordController.createLandlord)
