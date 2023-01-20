@@ -12,11 +12,11 @@ const Navbar = ({ isLoggedIn }) => {
 
   return (
     <header>
-      <div className="bg-secondary">
+      <div className="bg-olive">
         <div className="max-w-screen-xl mx-auto p-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center sm:space-x-10 space-x-2">
-              <img className="h-12" src={Logo} alt="Logo"></img>
+              <img className="h-12 chen" src={Logo} alt="Logo"></img>
               <Link to="/">
                 <h1 className="text-gray-600 py-2 hover:text-dark-purple font-semibold">
                   Rate My Landlord
