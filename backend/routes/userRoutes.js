@@ -1,9 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
+const cookieController = require('../controllers/cookieController')
 
 
-router.get("/reviews", userController.getReviews, (req, res) => {
-    res.status(200).json(res.locals.reviews); 
-}); 
+router.post("/login", 
+    userController.login,
+    cookieController.setSSIDCookie,
+  (req, res) => res.status(200).json('user authenicated!') )
+
+router.post('/logout', (req, res) => {
+    res.clearCookie('ssid')
+    res.status(200).json('logged out!')
+})
+
+router.post('/signup', userController.signup)
+
+
+
 
