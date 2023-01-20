@@ -1,13 +1,13 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 module.exports = {
-  entry: './frontend/index.js',
+  entry: './frontend/index.jsx',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/',
   },
-  mode: process.env.NODE_ENV,
+  mode: 'development',
   module: {
     rules: [
       {
