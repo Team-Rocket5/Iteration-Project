@@ -1,8 +1,8 @@
 CREATE TABLE public.landlords (
-	"id" numeric NOT NULL,
+	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"location" varchar(255) NOT NULL,
-	"rating" double(255) NOT NULL,
+	"rating" numeric(255) NOT NULL,
 	"neighborhood" varchar(255) NOT NULL,
 	CONSTRAINT "landlords_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -13,7 +13,7 @@ CREATE TABLE public.landlords (
 
 CREATE TABLE public.users (
 	"username" varchar(255) NOT NULL,
-	"id" numeric(255) NOT NULL,
+	"id" serial NOT NULL,
 	"email" varchar(255) NOT NULL,
 	"password" varchar(255) NOT NULL,
 	CONSTRAINT "users_pk" PRIMARY KEY ("id")
@@ -24,8 +24,8 @@ CREATE TABLE public.users (
 
 
 CREATE TABLE public.reviews (
-	"reviewer_id" varchar(255) NOT NULL,
-	"id" serial(255) NOT NULL,
+	"reviewer_id" serial NOT NULL,
+	"id" serial NOT NULL,
 	"review" varchar(1000) NOT NULL,
 	"pictures" bytea NOT NULL,
 	"landlord_id" bigint NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE public.reviews (
 
 
 CREATE TABLE public.properties (
-	"landlord_id" numeric NOT NULL,
+	"landlord_id" serial NOT NULL,
 	"id" serial NOT NULL,
 	"address" varchar(255) NOT NULL,
 	"neighborhood" varchar(255) NOT NULL,
@@ -54,10 +54,10 @@ CREATE TABLE public.properties (
 
 
 
-ALTER TABLE reviews ADD CONSTRAINT "reviews_fk0" FOREIGN KEY ("reviewer_id") REFERENCES "users"("id");
-ALTER TABLE reviews ADD CONSTRAINT "reviews_fk1" FOREIGN KEY ("landlord_id") REFERENCES "landlords"("id");
+ALTER TABLE public.reviews ADD CONSTRAINT "reviews_fk0" FOREIGN KEY ("reviewer_id") REFERENCES "users"("id");
+ALTER TABLE public.reviews ADD CONSTRAINT "reviews_fk1" FOREIGN KEY ("landlord_id") REFERENCES "landlords"("id");
 
-ALTER TABLE properties ADD CONSTRAINT "properties_fk0" FOREIGN KEY ("landlord_id") REFERENCES "landlords"("id");
+ALTER TABLE public.properties ADD CONSTRAINT "properties_fk0" FOREIGN KEY ("landlord_id") REFERENCES "landlords"("id");
 
 
 

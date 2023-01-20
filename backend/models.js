@@ -6,6 +6,7 @@ const PG_URI =
 // create a new pool here using the connection string above
 const pool = new Pool({
   connectionString: PG_URI,
+  password: process.env.PG_PASSWORD,
 })
 
 module.exports = {
