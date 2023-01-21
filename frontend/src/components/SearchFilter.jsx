@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SearchFilter {
+function SearchFilter (){
 
     return (
         <form class="w-full max-w-lg">
