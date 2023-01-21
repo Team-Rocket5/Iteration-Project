@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AddReview from './src/components/AddReview.jsx';
 import ReviewDetails from './src/components/ReviewDetails.jsx';
+import SearchFilter from './src/components/SearchFilter.jsx';
 import LandingPage from './src/pages/LandingPage.jsx';
 import LandlordPage from './src/pages/LandlordPage.jsx';
 import Navbar from './src/components/Navbar.jsx';
