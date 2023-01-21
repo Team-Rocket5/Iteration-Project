@@ -31,6 +31,7 @@ CREATE TABLE public.reviews (
 	"rating" serial NOT NULL,
 	"rent_again" BOOLEAN NOT NULL,
 	"date" DATE NOT NULL,
+	"address" varchar(255)
 	CONSTRAINT "reviews_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE

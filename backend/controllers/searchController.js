@@ -2,6 +2,7 @@ const db = require("../models");
 
 const searchController = {};
 
+//for search page: search landloard by name
 searchController.searchByName = async (req, res) => {
     try {
         console.log("Inside search controller---by name")
@@ -33,6 +34,7 @@ searchController.searchByName = async (req, res) => {
     }
 }
 
+////for search page: search landloard by location (city/town and neighborhood)
 searchController.searchByLocation = async (req, res) => {
     try {
         console.log("Inside search controller---by location")

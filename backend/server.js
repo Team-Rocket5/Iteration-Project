@@ -20,7 +20,7 @@ app.use(cookieParser());
  */
 app.use(express.static(path.resolve(__dirname, "../frontend")));
 
-app.use("/api", apiRouter);
+//app.use("/api", apiRouter);
 app.use("/search", searchRouter)
 app.use("/landlord", landlordRouter); 
 app.use(userRouter); 
