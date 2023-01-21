@@ -8,7 +8,6 @@ import building from '../assets/building.jpg';
 const LandingPage = () => {
   return (
     <>
-      <Navbar />
       <div className='flex flex-col mb-44'>
         <div className='w-full block container mb-20'>
           <img

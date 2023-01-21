@@ -25,3 +25,5 @@ yarn-error.log*
 .env
 .package-lock.json
 clipboard.txt
+frontend/src/.DS_Store
+frontend/src/.DS_Store
