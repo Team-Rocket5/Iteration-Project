@@ -10,7 +10,7 @@ const HomePage = () => {
         <div className='w-[800px] mx-auto'>
           <SearchFilter />
         </div>
-        <div className='flex flex-wrap mt-5 justify-center'>
+        <div className='flex flex-wrap mt-5 justify-center w-[70%] mx-auto'>
           <ResultCards />
           <ResultCards />
           <ResultCards />
