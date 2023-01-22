@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import Typography from "@mui/material/Typography";
 import Rating from '@mui/material/Rating';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 const ReviewDetails = () => {
   const reviewerName = 'Max Zorin';
@@ -24,11 +25,12 @@ const ReviewDetails = () => {
       }}
     >
       <Paper >
-        <div className='flex-col m-2 p-2'>
+        <div className='flex-col m-2 p-2' >
           <div>
             <AccountCircleOutlinedIcon fontSize='large' className='pl-1'/>
             <Typography variant="p" className='p-1 text-xs'>{reviewerName}</Typography>    
-            <Typography variant="p" className='text-xs pl-2'>Reviewed on {reviewDate}</Typography>      
+            <Typography variant="p" className='text-xs pl-2'>Reviewed on {reviewDate}  |  Verified</Typography>
+            <VerifiedIcon fontSize='xs' className='pl-1' style={{ fill: '#0072ea' }} />      
           </div>
           <div className='pl-1 flex items-center'>
             <div >
@@ -36,8 +38,8 @@ const ReviewDetails = () => {
             </div>
             <Typography variant="p" className='text-sm font-bold pl-3'>{reviewSubject}</Typography>    
           </div>
-          <div className='overflow-y-auto max-h-20'>
-            <Typography variant="p" className='text-sm pl-2'>{reviewContent}</Typography> 
+          <div className='overflow-y-auto max-h-20 ml-2 mt-1'>
+            <Typography variant="p" className='text-sm' flexWrap='row'>{reviewContent}</Typography> 
           </div>
         </div>
       </Paper>

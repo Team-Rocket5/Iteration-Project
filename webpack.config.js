@@ -1,5 +1,6 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const fs = require('fs')
 module.exports = {
   entry: './frontend/index.jsx',
   output: {
@@ -44,8 +45,8 @@ module.exports = {
       directory: path.resolve(__dirname, 'build'),
     },
     proxy: {
-      '/api': 'http://localhost:3000/',
+      '/api': 'https://localhost:3000/',
     },
     historyApiFallback: true,
   },
-};
+}
