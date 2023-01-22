@@ -21,7 +21,7 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 const AddReview =()=> {
     const landlord = 'James Bond';
     return (
-        <Card sx={{ maxWidth: 600 }} className="relative pb-10">
+        <Card sx={{ maxWidth: 560 }} className="relative pb-10">
             <CardContent >
                 <div className='flex py-4 '>
                     <Typography gutterBottom variant="h5" component="div" className='pl-4  text-dark' sx={{width:'75%', color:'dark'}}>
@@ -43,11 +43,11 @@ const AddReview =()=> {
                 autoComplete="off"
                 >
                 <div className='flex flex-col'>
-                    <TextField id="outlined-basic" label="Your Name" variant="outlined"/>
-                    <div className='flex content-center items-center'>
-                        <TextField id="outlined-basic" label="Property Address" variant="outlined" sx={{width:'45%'}}/>
-                        <div className='pl-10 text-dark'>
-                        Willing to Rent Again? <FormControlLabel className='pl-4' control={<Checkbox defaultChecked />} />
+                    <TextField id="outlined-basic" label="Your Name" variant="outlined" sx={{width:'40%'}}/>
+                    <div className='flex content-center items-center justify-between'>
+                        <TextField id="outlined-basic" label="Property Address" variant="outlined" sx={{width:'40%'}}/>
+                        <div className='pl-4 text-dark'>
+                        Willing to Rent Again? <FormControlLabel className='pl-2' control={<Checkbox defaultChecked />} />
                         </div>
                     </div>
                     <FormControl fullWidth sx={{ m: 1 }}>

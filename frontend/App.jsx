@@ -10,16 +10,7 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          {/* <Route path='/' element={<LandingPage />} /> */}
-          {/* <Route path='/' element={<AddReview />} /> */}
-          {/* <Route path='/' element={<ReviewDetails />} />  */}
-          <Route path='/' element={<SearchFilter />} />
-        </Routes>
-        <Routes>
-          <Route path='/' element={<ReviewDetails />} /> 
-        </Routes>
-        <Routes>
-          <Route path='/' element={<AddReview />} /> 
+          <Route path='/' element={<LandingPage />} />
         </Routes>
       </BrowserRouter>
     </>
