@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FormHelperText from '@mui/material/FormHelperText';
 import Rating from '@mui/material/Rating';
+import TextField from '@mui/material/TextField';
 
 const SearchFilter =()=>{
     const [city, setCity] = React.useState(['Toronto', 'New York', 'Houston', 'Poolesville', 'Boston']);
@@ -25,8 +26,8 @@ const SearchFilter =()=>{
         <Card sx={{ minWidth: 275, maxWidth: 800 }} className="relative pb-10">
             <CardContent>
 
-                <div className='p-3 rounded text-center'>
-                    <FormControl sx={{ m: 1, minWidth: 120, width: '47%' }} >
+                <div className='p-2 mt-10 rounded text-center'>
+                    <FormControl sx={{ m: 1, minWidth: 120, width: '48%' }} >
                         {/* <InputLabel id="demo-simple-select-helper-label">City</InputLabel> */}
                         <Select
                             id='selectCity'
@@ -68,26 +69,30 @@ const SearchFilter =()=>{
                 -or-
                 </Typography>
 
-                <FormControl fullWidth sx={{ m: 1, pl: 2, width: '95%' }}>
-                    <InputLabel htmlFor="outlined-adornment-amount"> Search By Name</InputLabel>
+                {/* <TextField fullWidth sx={{ m: 1, pl: 1, width: '97%' }} id="outlined-basic" label="Outlined" variant="outlined" /> */}
+
+                <FormControl  displayEmpty fullWidth sx={{ m: 1, pl:1.5, width: '96%' }} variant="outlined">
+                    {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
                     <OutlinedInput
-                        id="outlined-adornment-amount"
-                        label="Amount"
                     />
+                    <FormHelperText id="outlined-weight-helper-text">Search By Name</FormHelperText>
                 </FormControl>
                 
 
             </CardContent>
             <CardActions>
-                <Rating
-                    name="simple-controlled"
-                    value={value}
-                    onChange={(event, newValue) => {
-                    setValue(newValue);
-                    }}
-                    className='pl-8'
-                />
-                <button size="medium" className="bg-yellow p-3 rounded absolute right-9">Search</button>
+                <div className='flex ml-8 text-[#000000]'>
+                    Filter By: 
+                    <Rating
+                        name="simple-controlled"
+                        value={value}
+                        onChange={(event, newValue) => {
+                        setValue(newValue);
+                        }}
+                        className='pl-4'
+                    />
+                </div>
+                <button size="medium" className="bg-yellow p-3 rounded absolute right-9 px-10">Search</button>
             </CardActions>
         </Card>
        
