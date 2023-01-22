@@ -18,6 +18,9 @@ const App = () => {
         <Routes>
           <Route path='/' element={<ReviewDetails />} /> 
         </Routes>
+        <Routes>
+          <Route path='/' element={<AddReview />} /> 
+        </Routes>
       </BrowserRouter>
     </>
   );

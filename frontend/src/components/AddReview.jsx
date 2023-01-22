@@ -16,6 +16,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 const AddReview =()=> {
     const landlord = 'James Bond';
@@ -69,6 +70,7 @@ const AddReview =()=> {
             </Box>
             </CardContent>
             <CardActions>
+                <button className='ml-3'><AttachFileIcon fontSize='large'/></button>
                 <button size="medium" className="bg-yellow p-3 rounded absolute right-9">Add Review</button>
             </CardActions>
         </Card>
