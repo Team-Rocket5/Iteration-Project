@@ -5,7 +5,7 @@ import Logo from '../assets/Logo.png';
 const Navbar = () => {
 
   return (
-    <header className='w-[100%] fixed'>
+    <header className='w-[100%] fixed z-10 top-0'>
       <div className='header'>
         <div className='max-w-screen-xl mx-auto p-4'>
           <div className='flex justify-between items-center'>

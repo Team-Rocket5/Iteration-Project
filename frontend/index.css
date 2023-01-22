@@ -14,6 +14,21 @@ body {
   font-family: 'Cabin', sans-serif;
 }
 
+/* Social Media */
+.socials{
+  background-color: rgba(255, 255, 255, 0.611);
+  width: 50px;
+  height: 100px;
+  padding: 10px;
+  margin-top: 500px;
+  position: fixed;
+}
+
+.socIcon{
+  color: #29a598;
+  padding: 5px;
+}
+
 /* map container */
 .leaflet-container {
   height: 400px;
