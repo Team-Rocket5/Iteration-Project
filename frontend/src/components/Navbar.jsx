@@ -1,14 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// use hook to import context
 import Logo from '../assets/Logo.png';
 
 const Navbar = ({ isLoggedIn }) => {
-
-  const authBtnProps = {
-    text: isLoggedIn ? 'Log Out' : 'Log In',
-    route: isLoggedIn ? '/logout' : '/login'
-  };
 
   return (
     <header>
@@ -28,9 +22,6 @@ const Navbar = ({ isLoggedIn }) => {
                 <h3 className="text-gray-600 py-2 hover:text-dark-purple font-semibold">
                   Home
                 </h3>
-              </Link>
-              <Link to={`${authBtnProps.route}`} className="text-gray-600  hover:text-dark-purple font-semibold ">
-                <button type='button' className=" bg-primary p-2 rounded sm:text-1xl">{`${authBtnProps.text}`}</button>
               </Link>
             </div>
           </div>
