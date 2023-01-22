@@ -9,7 +9,10 @@ const position = [51.505, -0.09];
 
   return (
     <>
-      <div className='w-[80%] flex flex-col mx-auto mt-10'>
+      <div className='w-[80%] flex flex-col mx-auto mt-40'>
+        <h1 className='text-4xl mb-8 font-bold text-dark text-center'>
+          Reviews For ______________
+        </h1>
         {/* brief landlord info */}
         <div className=''></div>
         {/* Section for review card and add review ROW*/}
@@ -28,20 +31,19 @@ const position = [51.505, -0.09];
         </div>
         {/* Map and other info section */}
         <div className='leaflet-container'>
-
-            <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
-              <TileLayer
-                attribution='&copy; <a href="https://web.archive.org/web/20211121204128/http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-              />
-              <Marker position={position}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker>
-            </MapContainer>
-          </div>
+          <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+            <TileLayer
+              attribution='&copy; <a href="https://web.archive.org/web/20211121204128/http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            />
+            <Marker position={position}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </MapContainer>
         </div>
+      </div>
     </>
   );
 };

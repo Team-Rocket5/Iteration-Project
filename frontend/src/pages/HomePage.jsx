@@ -6,7 +6,10 @@ import SearchFilter from '../components/SearchFilter.jsx';
 const HomePage = () => {
   return (
     <>
-      <div className='w-[80%] flex flex-col mx-auto mt-10'>
+      <div className='w-[80%] flex flex-col mx-auto mt-40'>
+        <h1 className='text-4xl mb-8 font-bold text-dark text-center'>
+          Search For a Landlord
+        </h1>
         <div className='w-[800px] mx-auto'>
           <SearchFilter />
         </div>

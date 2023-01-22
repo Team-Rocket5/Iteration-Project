@@ -39,17 +39,20 @@ const LandingPage = () => {
           />
         </div>
 
-        <main className='w-[80%] w-min-[800px] bg-yellow mx-auto mt-20'>
-          <ul className='flex flex-wrap-reverse'>
+        <main className='w-10/12 mx-auto mt-20'>
+          <ul className='flex'>
             <li>
               {' '}
               <img
                 src={building}
                 alt='apartment building'
-                className='h-96 rounded-lg'
+                className='h-96 rounded-lg drop-shadow-lg p-1 bg-white'
               />
             </li>
-            <li className='w-[40%] p-10 my-auto mx-auto rounded-lg'>
+            <li className='w-[40%] p-20 my-auto mx-auto bg-[#ffffff8b] rounded-md'>
+              <h1 className='text-2xl mb-8 font-bold'>
+                Never Live In A Dump Again!
+              </h1>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum,
               rem nam! In sequi, iure corporis obcaecati voluptatibus distinctio
               impedit ipsum cum adipisci ad explicabo, molestias, libero
@@ -57,7 +60,10 @@ const LandingPage = () => {
             </li>
           </ul>
           <ul className='flex'>
-            <li className='w-[40%] p-10 my-auto mx-auto'>
+            <li className='w-[40%] p-20 my-auto mx-auto bg-[#ffffff8b] rounded-md'>
+              <h1 className='text-2xl mb-8 font-bold'>
+                Landlords: Find Out How To Improve
+              </h1>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum,
               rem nam! In sequi, iure corporis obcaecati voluptatibus distinctio
               impedit ipsum cum adipisci ad explicabo, molestias, libero
@@ -68,7 +74,7 @@ const LandingPage = () => {
               <img
                 src={building}
                 alt='apartment building'
-                className='h-96 rounded-lg'
+                className='h-96 rounded-lg drop-shadow-lg p-1 bg-white'
               />
             </li>
           </ul>
@@ -78,10 +84,13 @@ const LandingPage = () => {
               <img
                 src={building}
                 alt='apartment building'
-                className='h-96 rounded-lg'
+                className='h-96 rounded-lg drop-shadow-lg p-1 bg-white'
               />
             </li>
-            <li className='w-[40%] p-10 my-auto mx-auto'>
+            <li className='w-[40%] p-20 my-auto mx-auto bg-[#ffffff8b] rounded-md'>
+              <h1 className='text-2xl mb-8 font-bold'>
+                Real People, Real Reviews
+              </h1>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum,
               rem nam! In sequi, iure corporis obcaecati voluptatibus distinctio
               impedit ipsum cum adipisci ad explicabo, molestias, libero
