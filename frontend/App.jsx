@@ -15,6 +15,9 @@ const App = () => {
           {/* <Route path='/' element={<ReviewDetails />} />  */}
           <Route path='/' element={<SearchFilter />} />
         </Routes>
+        <Routes>
+          <Route path='/' element={<ReviewDetails />} /> 
+        </Routes>
       </BrowserRouter>
     </>
   );
