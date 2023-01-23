@@ -7,3 +7,6 @@ router.get("/name", searchController.searchByName)
 
 
 router.get("/location", searchController.searchByLocation) 
+
+
+module.exports = router; 

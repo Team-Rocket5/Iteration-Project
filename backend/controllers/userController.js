@@ -26,7 +26,7 @@ userController.login = async (req, res, next) => {
 
         const token = generateToken({ id: user.id, username: user.username })
         res.cookie("ssid", res.locals.id, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
-        res.status(201).json({user: {id: user.id, email: user.email}, accessToken: token)
+        res.status(201).json({user: {id: user.id, email: user.email}, accessToken: token})
         //next();
       } else {
         res.json("email or password incorrect");

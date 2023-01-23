@@ -8,6 +8,13 @@ auth.verifyToken = async (req, res, next) => {
     console.log("Request headers inside auth.verifyToken: ", req.headers); 
 
     let token = req.cookies.ssid;
+    
+    //alternatively (cookie is not really required)
+    // req.headers.authorization is a string of the form 'Bearer <JWT token>'
+    //let token = req.headers.authorization.split(' ')[1] 
+     
+    console.log("Token length: ", token.length)
+    //console.log("Token: ", token)
     if (!token) {
       return res
         .status(403)

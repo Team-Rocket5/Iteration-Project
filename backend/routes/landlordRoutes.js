@@ -10,5 +10,6 @@ router.get("/:id", landlordController.getReviews)
 router.post("/", auth.verifyToken, landlordController.createLandlord)
 
 
+module.exports = router; 
 
 

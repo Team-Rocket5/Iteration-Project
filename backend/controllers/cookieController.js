@@ -1,3 +1,5 @@
+//useless: function is added to user controller (login)
+
 const cookieController = {};
 /**
  * setSSIDCookie - store the user id in a cookie
