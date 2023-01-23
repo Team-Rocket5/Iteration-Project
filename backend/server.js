@@ -23,7 +23,7 @@ app.use(express.static(path.resolve(__dirname, "../frontend")));
 //app.use("/api", apiRouter);
 app.use("/search", searchRouter)
 app.use("/landlord", landlordRouter); 
-app.use(userRouter); 
+app.use("/user", userRouter); 
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) =>

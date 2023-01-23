@@ -8,7 +8,8 @@ reviewController.addReview = async (req, res) => {
     try {      
         const {landlordID, review, rent_again, rating, address} = req.body; //NTF: send the landlord ID in request please!
         //TODO: need to check if this way of getting user ID works
-        const reviewerID = req.user.id;
+        const reviewerID = req.user.id;//attainable through verification
+
         const values = [landlordID, reviewerID, review, rent_again, rating, address]
         //TODO: if address is provided (optional for reviewer) and new, add it to the properties table; 
 
@@ -28,3 +29,5 @@ reviewController.addReview = async (req, res) => {
 
 
 //TODO: update and delete 
+
+module.exports = reviewController; 

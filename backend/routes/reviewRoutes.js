@@ -5,3 +5,7 @@ const reviewController = require("../controllers/reviewController");
 
 
 router.post("/", auth.verifyToken, reviewController.addReview)
+
+
+
+module.exports = router; 
