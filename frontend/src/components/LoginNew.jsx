@@ -127,8 +127,11 @@ function ChildModal() {
               />
               <FormHelperText id="outlined-weight-helper-text">Type Your Password Again</FormHelperText>
             </FormControl>
-            <div className='text-center my-5'>
-            <button onClick={handleClose} className="bg-yellow rounded p-3 px-10 ml-6 font-large">Sign Up</button>
+            <div className='text-center mt-5'>
+              <button onClick={handleClose} className="bg-yellow rounded p-3 px-10 ml-6 font-large">Sign Up</button>
+            </div>
+            <div className='text-center ml-5'>
+              <button onClick={handleClose} className="m-5 text-right text-sm underline" >Have an account? Sign In</button>
             </div>
           </Box>
         </Modal>

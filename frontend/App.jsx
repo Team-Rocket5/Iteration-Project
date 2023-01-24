@@ -20,7 +20,7 @@ const App = () => {
           <FaInstagram className='socIcon' size={30} />
         </div>
         <Routes>
-          <Route path='/' element={<Login />} />
+          <Route path='/' element={<LandingPage />} />
           <Route path='/home' element={<HomePage />} />
           <Route path='/landlord' element={<LandlordPage />} />
           <Route path='/addLandlordNew' element={<AddLandlordNew />} />
