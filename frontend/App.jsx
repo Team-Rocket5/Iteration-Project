@@ -16,7 +16,6 @@ const App = () => {
         <Route path="/" element={<SearchFilter />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-
     </>
   )
 }
