@@ -6,9 +6,9 @@ const searchController = {};
 searchController.searchByName = async (req, res) => {
     try {
         console.log("Inside search controller---by name")
-        const landlordName = req.query.name; 
+        const landlordName = "$" + req.query.name + "$"; 
         const text = 
-            "SELECT * FROM landlords WHERE name = $1"; 
+            "SELECT * FROM landlords WHERE name ILIKE $1"; 
         const landlords = (await db.query(text, [landlordName])).rows;
         //if not found, return message
         if (!landlords) return res.json("landlord not in database");
