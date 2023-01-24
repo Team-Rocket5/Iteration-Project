@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import FormHelperText from '@mui/material/FormHelperText';
 import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
+import { useNavigate } from "react-router-dom";
+
 
 const SearchFilter =()=>{
     const [city, setCity] = React.useState(['Toronto', 'New York', 'Houston', 'Poolesville', 'Boston']);
@@ -21,6 +23,7 @@ const SearchFilter =()=>{
     const handleChange = (event) => {
         setCity(event.target.value);
     };
+    const navigate = useNavigate();
 
     return (
         <Card sx={{ minWidth: 275, maxWidth: 800 }} className="relative pb-10">
@@ -94,6 +97,10 @@ const SearchFilter =()=>{
                 </div>
                 <button size="medium" className="bg-yellow p-3 rounded absolute right-9 px-10">Search</button>
             </CardActions>
+            <div className="text-center pt-10 text-sm">
+                <span>Don't see the landlord you're looking for? </span>
+                <button size="medium" className='underline decoration-solid' onClick={() => navigate('/addLandlordNew')}>Add a landlord</button>
+            </div>
         </Card>
        
     );
