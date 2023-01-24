@@ -5,7 +5,8 @@ import Submit from '../css/form/Submit.jsx'
 import Title from '../css/form/Title.jsx'
 import FormInput from '../css/form/FormInput.jsx'
 import { useLocation } from 'react-router-dom'
-import OauthLogin from '/Users/samanthamills/Desktop/Codesmith/IterationProject/Iteration-Project/backend/oauth.js'
+//import OauthLogin from '/Users/samanthamills/Desktop/Codesmith/IterationProject/Iteration-Project/backend/oauth.js'
+import OauthLogin from '/Users/felixljr/Library/Mobile Documents/com~apple~CloudDocs/iCloud Documents/Programming/Codesmith/CS Coursework/CS Projects/Mid Projects/Mid_Iteration_Project/Iteration-Project/backend/oauth.js';
 
 async function loginUser(credentials, navigate, updateLoginStatus, from) {
   return fetch('api/login', {
@@ -25,7 +26,7 @@ async function loginUser(credentials, navigate, updateLoginStatus, from) {
     })
 }
 
-export default function Login({ updateLoginStatus }) {
+export default function OldLogin({ updateLoginStatus }) {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const navigate = useNavigate()
