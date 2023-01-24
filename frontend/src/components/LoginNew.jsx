@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import FormControl from '@mui/material/FormControl';
+import FormControl, { useFormControl } from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -30,6 +30,20 @@ const style = {
     pb: 10,
     
 };
+
+function MyEmailHelperText() {
+  const { focused } = useFormControl() || {};
+
+  const helperText = React.useMemo(() => {
+    if (focused) {
+      return 'We\'ll never share your email.';
+    }
+
+    return 'Your Email';
+  }, [focused]);
+
+  return <FormHelperText>{helperText}</FormHelperText>;
+}
 
 
 function ChildModal() {
@@ -61,7 +75,7 @@ function ChildModal() {
           <Box sx={{...style, width: 500}} className="relative">
             <FormControl  displayEmpty fullWidth sx={{ mx: 2,my:1, pl:1, width: '90%' }} variant="outlined">
               {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
-              <OutlinedInput
+              <OutlinedInput className='focus:border-none'
               />
               <FormHelperText id="outlined-weight-helper-text">Username</FormHelperText>
             </FormControl>
@@ -69,17 +83,47 @@ function ChildModal() {
               {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
               <OutlinedInput
               />
-              <FormHelperText id="outlined-weight-helper-text">Your Email</FormHelperText>
+              <MyEmailHelperText />
+              {/* <FormHelperText id="outlined-weight-helper-text">Your Email</FormHelperText>
+              <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
             </FormControl>
             <FormControl  displayEmpty fullWidth sx={{ mx: 2,my:1, pl:1, width: '90%' }} variant="outlined">
               {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
               <OutlinedInput
+                id="userPassword"
+                type={showPassword ? 'text' : 'password'}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
               <FormHelperText id="outlined-weight-helper-text">Password</FormHelperText>
             </FormControl>
             <FormControl  displayEmpty fullWidth sx={{ mx: 2,my:1, pl:1, width: '90%' }} variant="outlined">
               {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
               <OutlinedInput
+                id="userPassword"
+                type={showPassword ? 'text' : 'password'}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
               <FormHelperText id="outlined-weight-helper-text">Type Your Password Again</FormHelperText>
             </FormControl>

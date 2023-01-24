@@ -6,6 +6,7 @@ import Navbar from './src/components/Navbar.jsx';
 import HomePage from './src/pages/HomePage.jsx';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import Login from './src/components/LoginNew.jsx';
+import AddLandlordNew from './src/components/AddLandlordNew.jsx';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='/' element={<Login />} />
           <Route path='/home' element={<HomePage />} />
           <Route path='/landlord' element={<LandlordPage />} />
+          <Route path='/addLandlordNew' element={<AddLandlordNew />} />
           {/* <Route path='/signup' element={<Signup />} /> */}
         </Routes>
       </BrowserRouter>
