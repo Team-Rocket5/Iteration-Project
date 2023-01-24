@@ -5,6 +5,12 @@ const saltRounds = 10;
 
 const userController = {}; 
 
+function generateToken(id) {
+  return jwt.sign(id, process.env.JWT_SECRET, {
+    expiresIn: "3d",
+  });
+}
+
 userController.login = async (req, res, next) => {
     const { email, password } = req.body;
     const text = "SELECT * FROM users WHERE email = $1";
@@ -15,8 +21,13 @@ userController.login = async (req, res, next) => {
     try {
       if (user && (await bcrypt.compare(password, user.password))) {
         //pass the web token to the next middleware to set it as a cookie for session control
-        res.locals.id = generateToken({ id: user.id, username: user.username });
-        next();
+        //res.locals.id = generateToken({ id: user.id, username: user.username });
+        //added by Pengbo to simplify the code--no need for cookie controller
+
+        const token = generateToken({ id: user.id, username: user.username })
+        res.cookie("ssid", res.locals.id, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
+        res.status(201).json({user: {id: user.id, email: user.email}, accessToken: token})
+        //next();
       } else {
         res.json("email or password incorrect");
       }
@@ -49,10 +60,10 @@ userController.login = async (req, res, next) => {
   
     const text = "INSERT INTO users(username,email,password) VALUES ($1,$2,$3)";
   
-    const value = [username, email, hashedPassword];
+    const values = [username, email, hashedPassword];
   
-    db.query(text, value)
-      .then(_ => res.status(200).json("user created"))
+    db.query(text, values)
+      .then(_ => res.status(200).json("user signed up successfully"))
       .catch(err =>
         next({
           log: "error caught in createUsers middleware while trying to insert new user data into database!",
@@ -62,3 +73,5 @@ userController.login = async (req, res, next) => {
       );
   };
   
+
+  module.exports = userController; 

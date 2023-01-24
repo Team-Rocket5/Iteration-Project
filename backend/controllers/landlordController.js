@@ -3,7 +3,7 @@ const db = require("../models");
 const landlordController = {}; 
 
 // get reviews about a particular landloard 
-landlordController.getReviews = async (req, res) => {
+landlordController.getLandlordReviews = async (req, res) => {
     try {
     const landlordID = req.params.id; 
     const text = "SELECT * FROM reviews WHERE landlord_id = $1"
@@ -17,13 +17,13 @@ landlordController.getReviews = async (req, res) => {
     }
 }
 //create landlord 
-landlordController.createLandlord = async (req, res) => {
+landlordController.createLandlord = async (req, res, next) => {
   try {  
     const { name, location, neighborhood} = req.body;
     const text =
-        "INSERT INTO landlords(name, location, neighborhood) VALUES ($1,$2, $3) RETURNING _id, name, location";
+        "INSERT INTO landlords(name, location, neighborhood) VALUES ($1,$2, $3) RETURNING id, name, location";
     const values = [name, location, neighborhood];
-    const landlord = await db.query(text, values); 
+    const landlord = (await db.query(text, values)).rows[0]; 
     res.status(200).json(landlord); 
   } catch(err) {
         return next({
