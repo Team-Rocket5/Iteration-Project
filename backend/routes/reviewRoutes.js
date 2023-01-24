@@ -14,9 +14,11 @@ router.post("/", auth.verifyToken, reviewController.addReview)
 
 
 //edit 
+router.patch("/", auth.verifyToken, reviewController.updateReview); 
+
 
 //delete 
 
-
+router.delete("/", auth.verifyToken, reviewController.deleteReview); 
 
 module.exports = router; 
