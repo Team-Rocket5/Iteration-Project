@@ -22,9 +22,17 @@ app.use(cookieParser());
 app.use(express.static(path.resolve(__dirname, "../frontend")));
 
 //app.use("/api", apiRouter);
+
+//to search (by name/location)
 app.use("/search", searchRouter)
+
+//to create new landlord + access reviews of an landlord
 app.use("/landlord", landlordRouter); 
-app.use("/user", userRouter); 
+
+//user login/signup/logout
+app.use("/user", userRouter);
+
+//create/update/delete reviews, and get all reviews from logged-in user  
 app.use("/review", reviewRouter)
 
 

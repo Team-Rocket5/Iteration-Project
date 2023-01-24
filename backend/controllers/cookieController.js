@@ -1,4 +1,4 @@
-//useless: function is added to user controller (login)
+//function is added to user controller (login)
 
 const cookieController = {};
 /**
