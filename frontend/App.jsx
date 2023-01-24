@@ -1,62 +1,29 @@
-import React, { Component } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LandingPage from './src/pages/LandingPage.jsx';
+import LandlordPage from './src/pages/LandlordPage.jsx';
 import Navbar from './src/components/Navbar.jsx';
-import SearchPage from './src/components/SearchPage.jsx'; // characters
-import LandlordPage from './src/components/LandlordPage.jsx'; // customize character
-import Login from './src/components/Login.jsx';
-import Logout from './src/components/Logout.jsx'
-import Signup from './src/components/Signup.jsx';
-import AddLandlord from './src/components/AddLandlord.jsx';
+import HomePage from './src/pages/HomePage.jsx';
+import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-        isLoggedIn: false,
-    };
-  }
-  
-  updateLoginStatus = (isLoggedIn) => {
-    this.setState({isLoggedIn})};
-
-  render() {
-    return (
-      <div className="router">
-        <main>
-           <Navbar isLoggedIn={this.state.isLoggedIn}/> 
-           <Routes>
-            <Route
-              exact
-              path="/"
-              element={<SearchPage/>}
-            />
-            <Route
-              exact
-              path="/landlord"
-              element={<LandlordPage/>}
-            />
-            <Route
-              exact
-              path="/login"
-              element={<Login updateLoginStatus={this.updateLoginStatus}/>}
-            />
-            <Route
-              exact
-              path="/logout"
-              element={<Logout updateLoginStatus={this.updateLoginStatus}/>}
-            />
-            <Route
-              exact
-              path="/signup"
-              element={<Signup/>}
-            />
-            <Route exact path="/addlandlord" element={<AddLandlord />} />
-          </Routes>
-       </main>
-      </div>
-    );
-  }
+const App = () => {
+  return (
+    <>
+      <BrowserRouter>
+        <Navbar />
+        <div className='socials'>
+          <FaTwitter className='socIcon' size={30} />
+          <FaFacebook className='socIcon' size={30} />
+          <FaInstagram className='socIcon' size={30} />
+        </div>
+        <Routes>
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/home' element={<HomePage />} />
+          <Route path='/landlord' element={<LandlordPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  )
 }
 
-export default App;
+export default App

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Container from '../css/Container.jsx';
-import Submit from '../css/form/Submit.jsx';
-import Title from '../css/form/Title.jsx';
-import FormInput from '../css/form/FormInput.jsx';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import Container from '../css/Container.jsx'
+import Submit from '../css/form/Submit.jsx'
+import Title from '../css/form/Title.jsx'
+import FormInput from '../css/form/FormInput.jsx'
+import { useLocation } from 'react-router-dom'
+import OauthLogin from '/Users/samanthamills/Desktop/Codesmith/IterationProject/Iteration-Project/backend/oauth.js'
 
 async function loginUser(credentials, navigate, updateLoginStatus, from) {
   return fetch('api/login', {
@@ -14,42 +15,44 @@ async function loginUser(credentials, navigate, updateLoginStatus, from) {
     },
     body: JSON.stringify(credentials),
   })
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       if (data === 'user authenicated!') {
-        updateLoginStatus(true);
-        const destination = from === 'signup' ? '../' : -1;
-        navigate(destination);
+        updateLoginStatus(true)
+        const destination = from === 'signup' ? '../' : -1
+        navigate(destination)
       }
-    });
+    })
 }
 
-export default function Login({updateLoginStatus}) {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const navigate = useNavigate();
-  const location = useLocation();
-  let from;
-  if (location.state) from = location.state.from;
+export default function Login({ updateLoginStatus }) {
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const navigate = useNavigate()
+  const location = useLocation()
+  let from
+  if (location.state) from = location.state.from
 
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
-  });
+  })
   const handleChange = ({ target }) => {
-    const { value, name } = target;
-    setUserInfo({ ...userInfo, [name]: value });
-  };
+    const { value, name } = target
+    setUserInfo({ ...userInfo, [name]: value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     await loginUser(
       {
         ...userInfo,
       },
-      navigate, updateLoginStatus, from
-    );
-  };
+      navigate,
+      updateLoginStatus,
+      from,
+    )
+  }
 
   return (
     <div className="inset-0  flex justify-center items-center ">
@@ -87,7 +90,8 @@ export default function Login({updateLoginStatus}) {
             <p>Sign up</p>
           </Link>
         </button>
+        <button>{<OauthLogin />}</button>
       </Container>
     </div>
-  );
+  )
 }

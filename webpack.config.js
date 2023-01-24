@@ -1,13 +1,14 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const fs = require('fs')
 module.exports = {
-  entry: './frontend/index.js',
+  entry: './frontend/index.jsx',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/',
   },
-  mode: process.env.NODE_ENV,
+  mode: 'development',
   module: {
     rules: [
       {
@@ -44,8 +45,8 @@ module.exports = {
       directory: path.resolve(__dirname, 'build'),
     },
     proxy: {
-      '/api': 'http://localhost:3000/',
+      '/api': 'https://localhost:3000/',
     },
     historyApiFallback: true,
   },
-};
+}
