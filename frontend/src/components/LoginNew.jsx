@@ -45,20 +45,6 @@ function MyEmailHelperText() {
 }
 
 
-function MyEmailHelperText() {
-  const { focused } = useFormControl() || {};
-
-  const helperText = React.useMemo(() => {
-    if (focused) {
-      return "We'll never share your email.";
-    }
-
-    return 'Your Email';
-  }, [focused]);
-
-  return <FormHelperText>{helperText}</FormHelperText>;
-}
-
 function SignUp() {
   //set states for sign-up
   const navigate = useNavigate();
@@ -88,8 +74,8 @@ function SignUp() {
   const handleClose = () => {
     setOpen(false);
   };
+  
   //on Submit
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
