@@ -46,7 +46,7 @@ function MyEmailHelperText() {
 }
 
 
-function ChildModal() {
+function SignUp() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
       setOpen(true);
@@ -157,7 +157,7 @@ const Login = () => {
     };
     return (
       <div className="mt-96">
-        <Button onClick={handleOpen}>Sign In</Button>
+        <Button onClick={handleOpen}>Login/Register</Button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -199,7 +199,7 @@ const Login = () => {
             </Typography>
             <button size="medium" className="px-28 rounded ml-6 border-solid border-2 py-4">Sign in with Google</button>
             <div className='text-center'>
-              <ChildModal/>
+              <SignUp />
             </div>
           </Box>
         </Modal>
