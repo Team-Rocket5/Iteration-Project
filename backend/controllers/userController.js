@@ -42,7 +42,7 @@ userController.login = async (req, res, next) => {
 
   userController.signup = async (req, res, next) => {
     const { username, email, password } = req.body;
-  
+    console.log("We have a new request:", req.body)
     db.query(`SELECT * FROM users where email = '${email}'`)
       .then(data => {
         if (data.rows[0] !== undefined)
