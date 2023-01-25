@@ -35,7 +35,7 @@ function MyEmailHelperText() {
 
   const helperText = React.useMemo(() => {
     if (focused) {
-      return "We'll never share your email.";
+      return 'We\'ll never share your email.';
     }
 
     return 'Your Email';
@@ -43,6 +43,7 @@ function MyEmailHelperText() {
 
   return <FormHelperText>{helperText}</FormHelperText>;
 }
+
 
 function SignUp() {
   //set states for sign-up
@@ -73,8 +74,8 @@ function SignUp() {
   const handleClose = () => {
     setOpen(false);
   };
+  
   //on Submit
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
