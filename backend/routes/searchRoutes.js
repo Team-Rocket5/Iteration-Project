@@ -3,7 +3,10 @@ const router = express.Router();
 const searchController = require("../controllers/searchController");
 
 
-router.get("/name", searchController.searchByName) 
+router.get("/landlord", searchController.searchByName) 
 
 
 router.get("/location", searchController.searchByLocation) 
+
+
+module.exports = router; 
