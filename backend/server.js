@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 
+
 const app = express();
 const apiRouter = require("./routes/api");
 const userRouter = require("./routes/userRoutes")
@@ -18,6 +19,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
+app.use(cors())
   /**
    * handle requests for static files
    */

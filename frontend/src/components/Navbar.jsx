@@ -5,12 +5,12 @@ import Login from './LoginNew.jsx';
 
 const Navbar = () => {
 
-  const [isLoggedIn, setisLoggedIn] = useState(true);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
 
   return (
     <header className='w-[100%] fixed z-10 top-0'>
       <div className='header'>
-        <div className='max-w-screen-xl mx-auto p-4'>
+        <div className='max-w-screen-xl mx-auto p-4 relative'>
           <div className='flex justify-between items-center'>
             <div className='flex items-center sm:space-x-10 space-x-2'>
               <img className='h-24' src={Logo} alt='Logo'></img>
@@ -36,11 +36,13 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Link to='/home'>
-                    <h3 className='text-gray-600 py-2 hover:text-dark-purple font-semibold text-2xl'>
+                  {/* <Link to='/home'> */}
+                    {/* <h3 className='text-gray-600 py-2 hover:text-dark-purple font-semibold text-2xl'> */}
+                    <div >
                       <Login />
-                    </h3>
-                  </Link>
+                    </div>
+                    {/* </h3> */}
+                  {/* </Link> */}
                 </>
               )}
             </div>
