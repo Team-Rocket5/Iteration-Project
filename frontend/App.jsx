@@ -13,7 +13,6 @@ const App = () => {
     <>
       <BrowserRouter>
         <Navbar />
-        <Login />
         <div className='socials'>
           <FaTwitter className='socIcon' size={30} />
           <FaFacebook className='socIcon' size={30} />

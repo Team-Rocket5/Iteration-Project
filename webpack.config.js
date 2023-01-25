@@ -46,6 +46,7 @@ module.exports = {
     },
     proxy: {
       '/api': 'https://localhost:3000/',
+      '/user': 'https://localhost:3000/',
     },
     historyApiFallback: true,
   },
