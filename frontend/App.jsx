@@ -1,6 +1,5 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import LandingPage from './src/pages/LandingPage.jsx'
 import Login from '/Users/samanthamills/Desktop/Codesmith/IterationProject/Iteration-Project/frontend/src/components/Login.jsx'
 import LandingPage from './src/pages/LandingPage.jsx'
 import LandlordPage from './src/pages/LandlordPage.jsx'
