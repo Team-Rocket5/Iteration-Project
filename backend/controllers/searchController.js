@@ -6,7 +6,9 @@ const searchController = {};
 searchController.searchByName = async (req, res) => {
     try {
         console.log("Inside search controller---by name")
-        const landlordName = "$" + req.query.name + "$"; 
+        console.log("Landloard name: ", req.query.name); 
+
+        const landlordName = "%" + req.query.name + "%"; 
         const text = 
             "SELECT * FROM landlords WHERE name ILIKE $1"; 
         const landlords = (await db.query(text, [landlordName])).rows;
@@ -16,8 +18,10 @@ searchController.searchByName = async (req, res) => {
         //looper over all landlords if found to add rating data 
         for (let landlord of landlords) {
             const ratingQuery = "SELECT AVG(rating) FROM reviews where landlord_id = $1"; 
-            const rating = await db.query(ratingQuery, [landlord.id]); //get average rating a particular landlord
+            //console.log("Landlord ID: ", landlord.id)
+            const rating = (await db.query(ratingQuery, [landlord.id])).rows[0].avg; //get average rating a particular landlord
             //if rating does not exist, assign to null; otherwise to a one decimal number; 
+            //console.log("Average: ", rating); 
             landlord.rating = rating === null ? null : Number.parseFloat(rating).toFixed(1) 
         } 
         res.locals.landlords = landlords;  // an array of landlord objects;   
@@ -35,17 +39,20 @@ searchController.searchByName = async (req, res) => {
 }
 
 ////for search page: search landloard by location (city/town and neighborhood)
-searchController.searchByLocation = async (req, res) => {
+searchController.searchByLocation = async (req, res, next) => {
     try {
         console.log("Inside search controller---by location")
         const location = req.query.location;
         const neighborhood = req.query.neighborhood;  
+        console.log(location + neighborhood)
         const text = 
             "SELECT * FROM landlords WHERE location = $1 AND neighborhood = $2"; 
-        const landlords = await db.query(text, [location, neighborhood]); 
+        const landlords = (await db.query(text, [location, neighborhood])).rows; 
+        console.log("Result:", landlords); 
+
         for (let landlord of landlords) {
             const ratingQuery = "SELECT AVG(rating) FROM reviews where landlord_id = $1"; 
-            const rating = await db.query(ratingQuery, [landlord.id]); //get average rating a particular landlord
+            const rating =(await db.query(ratingQuery, [landlord.id])).rows[0].avg; //get average rating a particular landlord
             //if rating does not exist, assign to null; otherwise to a one decimal number; 
             landlord.rating = rating === null ? null : Number.parseFloat(rating).toFixed(1) 
         } 
