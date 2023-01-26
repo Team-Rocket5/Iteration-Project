@@ -87,7 +87,7 @@ const AddReview =()=> {
                     </Typography>
                     <Rating name="half-rating" defaultValue={0} precision={0.5} 
                         onChange={(event, newValue) => {
-                        setValue(newValue);
+                            setValue(newValue);
                         }}
                     />
                 </div>
