@@ -81,7 +81,7 @@ function SignUp() {
 
     console.log("On Submit fired!")
     const {username, email, password} = formData;
-    const response = await axios.post('http://localhost:3000/user/signup', {username, email, password});
+    const response = await axios.post('user/signup', {username, email, password});
     if(response.data) console.log('success');
     else console.log('error');
     handleClose();
