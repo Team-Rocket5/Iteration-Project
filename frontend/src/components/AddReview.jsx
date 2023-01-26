@@ -17,12 +17,14 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import axios from 'axios';
 
 const AddReview =()=> {
     //temporary data, waiting for global state
     const landlord = 'James Bond';
     const landlordID = '123temp';
     const reviewerID = '123456' ;
+    //const picture = 'https://upload.wikimedia.org/wikipedia/commons/6/64/Old_room_%286811031135%29.jpg'
 
     //adding state to temporarily store form data
     const [checked, setChecked] = React.useState(true);
@@ -33,7 +35,6 @@ const AddReview =()=> {
         console.log('rent_again', rent_again);
     };
 
-    
     const [formData, setFormData] = useState({
         review: '',
         rating:'',
@@ -69,7 +70,8 @@ const AddReview =()=> {
         setDate(currentDate);
         console.log("On Submit for Review fired!")
         const {review, rating, subject, reviewerName, address, picture} = formData;
-        const response = await axios.post('http://localhost:3000/review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address, picture});
+        //picture as stretch
+        const response = await axios.post('review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
         if(response.data) console.log('success');
         else console.log('error');
         navigate('/landlord');
@@ -161,7 +163,7 @@ const AddReview =()=> {
             </CardContent>
             <CardActions>
                 <button className='ml-3'><AttachFileIcon fontSize='large'/></button>
-                <button size="medium" className="bg-yellow p-3 rounded absolute right-9">Add Review</button>
+                <button size="medium" className="bg-yellow p-3 rounded absolute right-9" onClick={onSubmit}>Add Review</button>
             </CardActions>
         </Card>
         

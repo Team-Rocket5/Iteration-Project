@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-//import OauthLogin from '/Users/felixljr/Library/Mobile Documents/com~apple~CloudDocs/iCloud Documents/Programming/Codesmith/CS Coursework/CS Projects/Mid Projects/Mid_Iteration_Project/Iteration-Project/backend/oauth.js';
+import OauthLogin from '../../../backend/oauth.js';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
