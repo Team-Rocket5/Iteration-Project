@@ -11,20 +11,21 @@ import AddLandlordNew from './src/components/AddLandlordNew.jsx'
 const App = () => {
   return (
     <>
-      <Navbar />
-      <Login />
-      <div className="socials">
-        <FaTwitter className="socIcon" size={30} />
-        <FaFacebook className="socIcon" size={30} />
-        <FaInstagram className="socIcon" size={30} />
-      </div>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/landlord" element={<LandlordPage />} />
-        <Route path="/addLandlordNew" element={<AddLandlordNew />} />
-        {/* <Route path="/signup" element={<Signup />} /> */}
-      </Routes>
+      <BrowserRouter>
+        <Navbar />
+        <div className="socials">
+          <FaTwitter className="socIcon" size={30} />
+          <FaFacebook className="socIcon" size={30} />
+          <FaInstagram className="socIcon" size={30} />
+        </div>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/landlord" element={<LandlordPage />} />
+          <Route path="/addLandlordNew" element={<AddLandlordNew />} />
+          {/* <Route path='/signup' element={<Signup />} /> */}
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

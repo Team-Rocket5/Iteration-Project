@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import OauthLogin from '../../../backend/oauth.js'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import Button from '@mui/material/Button'
@@ -12,7 +13,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import InputAdornment from '@mui/material/InputAdornment'
 import IconButton from '@mui/material/IconButton'
-import OauthLogin from '../../../backend/oauth'
+import axios from 'axios'
 
 const style = {
   position: 'absolute',
@@ -43,8 +44,28 @@ function MyEmailHelperText() {
   return <FormHelperText>{helperText}</FormHelperText>
 }
 
-function ChildModal() {
+function SignUp() {
+  //set states for sign-up
+  const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    password2: '',
+  })
+
+  //on Change
+  const onChange = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  //close and open Modal - UI
   const handleOpen = () => {
     setOpen(true)
   }
@@ -52,13 +73,30 @@ function ChildModal() {
     setOpen(false)
   }
 
+  //on Submit
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    console.log('On Submit fired!')
+    const { username, email, password } = formData
+    const response = await axios.post('user/signup', {
+      username,
+      email,
+      password,
+    })
+    if (response.data) console.log('success')
+    else console.log('error')
+    handleClose()
+    navigate('/')
+  }
+
+  //show and hide Password - UI
   const [showPassword, setShowPassword] = React.useState(false)
-
   const handleClickShowPassword = () => setShowPassword((show) => !show)
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault()
   }
+
   return (
     <React.Fragment>
       <button onClick={handleOpen} className="m-5 text-right text-sm underline">
@@ -79,7 +117,14 @@ function ChildModal() {
             variant="outlined"
           >
             {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
-            <OutlinedInput className="focus:border-none" />
+            <OutlinedInput
+              id="signUpUser"
+              className="focus:border-none"
+              name="username"
+              value={formData.username}
+              required={true}
+              onChange={onChange}
+            />
             <FormHelperText id="outlined-weight-helper-text">
               Username
             </FormHelperText>
@@ -90,11 +135,14 @@ function ChildModal() {
             sx={{ mx: 2, my: 1, pl: 1, width: '90%' }}
             variant="outlined"
           >
-            {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
-            <OutlinedInput />
+            <OutlinedInput
+              id="signUpEmail"
+              name="email"
+              value={formData.email}
+              required={true}
+              onChange={onChange}
+            />
             <MyEmailHelperText />
-            {/* <FormHelperText id="outlined-weight-helper-text">Your Email</FormHelperText>
-              <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
           </FormControl>
           <FormControl
             displayEmpty
@@ -104,7 +152,11 @@ function ChildModal() {
           >
             {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
             <OutlinedInput
-              id="userPassword"
+              id="userPassword1"
+              name="password"
+              value={formData.password}
+              required={true}
+              onChange={onChange}
               type={showPassword ? 'text' : 'password'}
               endAdornment={
                 <InputAdornment position="end">
@@ -131,7 +183,11 @@ function ChildModal() {
           >
             {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
             <OutlinedInput
-              id="userPassword"
+              id="userPassword2"
+              name="password2"
+              value={formData.password2}
+              required={true}
+              onChange={onChange}
               type={showPassword ? 'text' : 'password'}
               endAdornment={
                 <InputAdornment position="end">
@@ -152,8 +208,9 @@ function ChildModal() {
           </FormControl>
           <div className="text-center mt-5">
             <button
-              onClick={handleClose}
+              onClick={onSubmit}
               className="bg-yellow rounded p-3 px-10 ml-6 font-large"
+              type="submit"
             >
               Sign Up
             </button>
@@ -189,8 +246,13 @@ const Login = () => {
     event.preventDefault()
   }
   return (
-    <div className="mt-96">
-      <Button onClick={handleOpen}>Sign In</Button>
+    <div className="mt-2">
+      <button
+        onClick={handleOpen}
+        className="text-gray-600 py-2 hover:text-dark-purple font-semibold text-2xl"
+      >
+        Login/Register
+      </button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -211,7 +273,7 @@ const Login = () => {
             variant="outlined"
           >
             {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
-            <OutlinedInput />
+            <OutlinedInput id="LoginEmail" />
             <FormHelperText id="outlined-weight-helper-text">
               Your Email
             </FormHelperText>
@@ -224,7 +286,7 @@ const Login = () => {
           >
             {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
             <OutlinedInput
-              id="userPassword"
+              id="loginPassword"
               type={showPassword ? 'text' : 'password'}
               endAdornment={
                 <InputAdornment position="end">
@@ -262,10 +324,10 @@ const Login = () => {
             size="medium"
             className="px-28 rounded ml-6 border-solid border-2 py-4"
           >
-            {<OauthLogin />}
+            Sign in with Google
           </button>
           <div className="text-center">
-            <ChildModal />
+            <SignUp />
           </div>
         </Box>
       </Modal>
