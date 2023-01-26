@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewDetails from '../components/ReviewDetails.jsx';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import UserReviewDetails from '../components/UserReviewDetails.jsx'
 
 
 const Dashboard = () => {
@@ -16,11 +17,10 @@ const Dashboard = () => {
         {/* Section for review card and add review ROW*/}
         <div className='flex flex-row max-h-[588px] w-fit mx-auto'>
           <div className='overflow-auto'>
-            <ReviewDetails />
-            <ReviewDetails />
-            <ReviewDetails />
-            <ReviewDetails />
-            <ReviewDetails />
+            <UserReviewDetails />
+            <UserReviewDetails />
+            <UserReviewDetails />
+            <UserReviewDetails />
           </div>
         </div>
       </div>
