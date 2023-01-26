@@ -39,3 +39,7 @@ body {
   margin: 10px auto;
   max-height: 100%;
 }
+
+input {
+  --tw-ring-shadow: 0 0 #000 !important;
+}

@@ -35,7 +35,7 @@ function MyEmailHelperText() {
 
   const helperText = React.useMemo(() => {
     if (focused) {
-      return "We'll never share your email.";
+      return 'We\'ll never share your email.';
     }
 
     return 'Your Email';
@@ -43,6 +43,7 @@ function MyEmailHelperText() {
 
   return <FormHelperText>{helperText}</FormHelperText>;
 }
+
 
 function SignUp() {
   //set states for sign-up
@@ -73,14 +74,14 @@ function SignUp() {
   const handleClose = () => {
     setOpen(false);
   };
+  
   //on Submit
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
     console.log("On Submit fired!")
     const {username, email, password} = formData;
-    const response = await axios.post('http://localhost:3000/user/signup', {username, email, password});
+    const response = await axios.post('user/signup', {username, email, password});
     if(response.data) console.log('success');
     else console.log('error');
     handleClose();

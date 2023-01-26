@@ -5,7 +5,7 @@ import Login from './LoginNew.jsx';
 
 const Navbar = () => {
 
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [isLoggedIn, setisLoggedIn] = useState(true);
 
   return (
     <header className='w-[100%] fixed z-10 top-0'>
