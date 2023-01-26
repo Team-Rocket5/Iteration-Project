@@ -14,7 +14,6 @@ router.get("/", auth.verifyToken, reviewController.getUserReviews
 //temp: remove verification
 router.post("/", //auth.verifyToken,
  reviewController.addReview)
- reviewController.addReview)
 
 
 //edit 
