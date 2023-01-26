@@ -1,24 +1,22 @@
-import { GoogleLogin } from 'react-google-login'
-import React, { useEffect } from 'react'
-import { gapi } from 'gapi-script'
+import {
+  gapi,
+  loadAuth2,
+  loadClientAuth2,
+  loadAuth2WithProps,
+} from 'gapi-script'
 
-const client_id =
-  '765795421040-aa97k645gudat0np6nlicvblcc4e0o13.apps.googleusercontent.com'
-
-function OauthLogin() {
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        client_id: client_id,
-        scope: '',
-      })
-    }
+async function OauthLogin() {
+  function start() {
+    gapi.client.init({
+      client_id: client_id,
+      scope: '',
+    })
 
     gapi.load('client:auth2', start)
-  })
+  }
 
   const onSuccess = (res) => {
-    console.log(`Login successful! Current user: ${res.profileObj}`)
+    console.log(`Login successful! `)
   }
 
   const onFailure = (res) => {
