@@ -17,9 +17,67 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import axios from 'axios';
 
 const AddReview =()=> {
+    //temporary data, waiting for global state
     const landlord = 'James Bond';
+    const landlordID = '123temp';
+    const reviewerID = '123456' ;
+    //const picture = 'https://upload.wikimedia.org/wikipedia/commons/6/64/Old_room_%286811031135%29.jpg'
+
+    //adding state to temporarily store form data
+    const [checked, setChecked] = React.useState(true);
+    const rent_again = !checked;
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+        console.log(checked);
+        console.log('rent_again', rent_again);
+    };
+
+    const [formData, setFormData] = useState({
+        review: '',
+        rating:'',
+        date:'',
+
+        //data point to be discussed
+        reviewerName: '',
+        address:'',
+        picture: '',
+        subject: '',
+    });
+
+    //on Change
+    const onChange = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        const {name, value} = e.target
+        setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+        }));
+    };
+
+    //get current date for review
+    const [date, setDate] = useState('');
+    const event = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const currentDate = event.toLocaleDateString(undefined, options)
+
+    //on Submit
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        setDate(currentDate);
+        console.log("On Submit for Review fired!")
+        const {review, rating, subject, reviewerName, address, picture} = formData;
+        //picture as stretch
+        const response = await axios.post('review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
+        if(response.data) console.log('success');
+        else console.log('error');
+        navigate('/landlord');
+    };
+
+    
     return (
         <Card sx={{ maxWidth: 560 }} className="relative pb-10">
             <CardContent >
@@ -40,21 +98,51 @@ const AddReview =()=> {
                     maxWidth: '95%',
                 }}
                 noValidate
-                autoComplete="off"
+                autoComplete="on"
                 >
                 <div className='flex flex-col'>
-                    <TextField id="outlined-basic" label="Your Name" variant="outlined" sx={{width:'40%'}}/>
+                    <TextField 
+                        id="outlined-basic" 
+                        label="Your Name" 
+                        variant="outlined" 
+                        sx={{width:'40%'}}
+                        name='reviewerName'
+                        value={formData.reviewerName}
+                        required={true}
+                        onChange={onChange}
+                    />
                     <div className='flex content-center items-center justify-between'>
-                        <TextField id="outlined-basic" label="Property Address" variant="outlined" sx={{width:'40%'}}/>
+                        <TextField 
+                            id="outlined-basic" 
+                            label="Property Address" 
+                            variant="outlined" 
+                            sx={{width:'40%'}}
+                            name='address'
+                            value={formData.address}
+                            required={true}
+                            onChange={onChange}
+                        />
                         <div className='pl-4 text-dark'>
-                        Willing to Rent Again? <FormControlLabel className='pl-2' control={<Checkbox defaultChecked />} />
+                        Willing to Rent Again? <FormControlLabel 
+                            className='pl-2' 
+                            control={<Checkbox 
+                            name='rent_again'
+                            required={true}
+                            checked={checked}
+                            onChange={handleChange} />} 
+                        />
                         </div>
                     </div>
-                    <FormControl fullWidth sx={{ m: 1 }}>
+                    <FormControl fullWidth sx={{ m: 1}}>
                         <InputLabel htmlFor="outlined-adornment-amount">Subject</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-amount"
                             label="Amount"
+                            name='subject'
+                            value={formData.subject}
+                            required={true}
+                            onChange={onChange}
+                            
                         />
                     </FormControl>
                     <FormControl fullWidth sx={{ m: 1 }}>
@@ -64,6 +152,10 @@ const AddReview =()=> {
                             label="Amount"
                             multiline
                             rows={6}
+                            name='review'
+                            value={formData.review}
+                            required={true}
+                            onChange={onChange}
                         />
                     </FormControl>
                 </div>        
@@ -71,7 +163,7 @@ const AddReview =()=> {
             </CardContent>
             <CardActions>
                 <button className='ml-3'><AttachFileIcon fontSize='large'/></button>
-                <button size="medium" className="bg-yellow p-3 rounded absolute right-9">Add Review</button>
+                <button size="medium" className="bg-yellow p-3 rounded absolute right-9" onClick={onSubmit}>Add Review</button>
             </CardActions>
         </Card>
         
