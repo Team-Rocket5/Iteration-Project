@@ -22,8 +22,8 @@ import axios from 'axios';
 const AddReview =()=> {
     //temporary data, waiting for global state
     const landlord = 'James Bond';
-    const landlordID = '123temp';
-    const reviewerID = '123456' ;
+    const landlordID = 1;
+    const reviewerID = 1;
 
     //adding state to temporarily store form data
     const [checked, setChecked] = React.useState(true);
@@ -36,7 +36,7 @@ const AddReview =()=> {
 
     const [formData, setFormData] = useState({
         review: '',
-        rating:'',
+        //rating:'',
         date:'',
         address:'',
         reviewerName: '',
@@ -62,18 +62,19 @@ const AddReview =()=> {
     const event = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const currentDate = event.toLocaleDateString(undefined, options)
-
+    //hard coded rating
+    const rating = 5; 
     //on Submit
     const onSubmit = async (e) => {
         e.preventDefault();
         setDate(currentDate);
         console.log(date);
         console.log("On Submit for Review fired!")
-        const {review, rating, subject, reviewerName, address} = formData;
-        const response = await axios.post('/review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
+        const {review, subject, reviewerName, address} = formData;
+        const response = await axios.post('review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
         if(response.data) console.log('success');
         else console.log('error');
-        navigate('/landlord');
+        //navigate('/landlord');
     };
 
     

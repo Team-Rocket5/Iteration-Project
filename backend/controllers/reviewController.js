@@ -21,23 +21,33 @@ reviewController.getUserReviews = async (req, res, next)=> {
 reviewController.addReview = async (req, res, next) => {
     try {  
          
-        const {landlordID, review, rent_again, rating, date, reviewerID, reviewerName} = req.body;
+        //const {landlordID, review, rent_again, rating, date} = req.body; //NTF: send the landlord ID in request please!
+        
+        
+        //temporary: grab reviewerID and name from request
+        
+        //const reviewerID = req.user.id;//attainable through verification
+        console.log("Request is: ", req.body)
+        const {landlordID, review, rent_again, rating, date, reviewerID, reviewerName, address, subject} = req.body;
        
         const values = [landlordID, reviewerID, review, rent_again, rating, date, reviewerName, address, subject]
-        
-        console.log(values)
+
         //TODO: if address is provided (optional for reviewer) and new, add it to the properties table; 
 
         //temporary: text with address 
-        const text = "INSERT INTO reviews(landlord_id, reviewer_id, review, rent_again, rating, date, reviewerName, address, subject)\
-           VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)\
-        //     RETURNING review"
+        const text = "INSERT INTO reviews(landlord_id, reviewer_id, review, rent_again, rating, date, reviewer_name, address, subject)\
+           VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)"
         // const text = 
         //     "INSERT INTO reviews(landlord_id, reviewer_id, review, rent_again, rating, date)\
         //     VALUES($1, $2, $3, $4, $5, $6)\
         //     RETURNING review"
-        const newReview = (await db.query(text, values)).rows[0]; 
-        console.log("new review: ", newReview)
+
+        await db.query(text, values); 
+        //console.log("new review: ", newReview)
+
+        // const newReview = (await db.query(text, values)).rows[0]; 
+        // console.log("new review: ", newReview)
+
         res.send("review added!")
     } catch (err) {
         return next({
@@ -46,19 +56,7 @@ reviewController.addReview = async (req, res, next) => {
         });
     }
 
-        //     VALUES($1, $2, $3, $4, $5, $6)\
-        //     RETURNING review"
-        const newReview = (await db.query(text, values)).rows[0]; 
-        console.log("new review: ", newReview)
-        res.send("review added!")
-    } catch (err) {
-        return next({
-            log: `reviewController.addReview: ${err}`,
-            message: { err: "Failed to add new user review" },
-        });
-    }
-
-}
+}  
 
 // update review
 
