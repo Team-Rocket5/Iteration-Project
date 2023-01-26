@@ -7,7 +7,8 @@ const auth = require("../middleware/auth")
 
 router.get("/:id", landlordController.getLandlordReviews)
 
-router.post("/", auth.verifyToken, landlordController.createLandlord)
+router.post("/", //auth.verifyToken,==> removed for testing
+ landlordController.createLandlord)
 
 
 module.exports = router; 
