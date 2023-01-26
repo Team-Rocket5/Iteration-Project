@@ -9,9 +9,11 @@ router.get("/", auth.verifyToken, reviewController.getUserReviews
 
 )
 
+
 //add a new review to a landlord
 //temp: remove verification
 router.post("/", //auth.verifyToken,
+ reviewController.addReview)
  reviewController.addReview)
 
 

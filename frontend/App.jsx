@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './src/pages/LandingPage.jsx'
 import LandlordPage from './src/pages/LandlordPage.jsx'
 import Navbar from './src/components/Navbar.jsx'

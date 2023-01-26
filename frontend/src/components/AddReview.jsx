@@ -24,7 +24,6 @@ const AddReview =()=> {
     const landlord = 'James Bond';
     const landlordID = '123temp';
     const reviewerID = '123456' ;
-    //const picture = 'https://upload.wikimedia.org/wikipedia/commons/6/64/Old_room_%286811031135%29.jpg'
 
     //adding state to temporarily store form data
     const [checked, setChecked] = React.useState(true);
@@ -39,12 +38,12 @@ const AddReview =()=> {
         review: '',
         rating:'',
         date:'',
+        address:'',
+        reviewerName: '',
+        subject: '',
 
         //data point to be discussed
-        reviewerName: '',
-        address:'',
         picture: '',
-        subject: '',
     });
 
     //on Change
@@ -68,10 +67,10 @@ const AddReview =()=> {
     const onSubmit = async (e) => {
         e.preventDefault();
         setDate(currentDate);
+        console.log(date);
         console.log("On Submit for Review fired!")
-        const {review, rating, subject, reviewerName, address, picture} = formData;
-        //picture as stretch
-        const response = await axios.post('review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
+        const {review, rating, subject, reviewerName, address} = formData;
+        const response = await axios.post('/review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
         if(response.data) console.log('success');
         else console.log('error');
         navigate('/landlord');
@@ -166,7 +165,6 @@ const AddReview =()=> {
                 <button size="medium" className="bg-yellow p-3 rounded absolute right-9" onClick={onSubmit}>Add Review</button>
             </CardActions>
         </Card>
-        
     )
 }
 // import Container from '../css/Container.jsx';
