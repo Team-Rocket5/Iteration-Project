@@ -46,19 +46,7 @@ reviewController.addReview = async (req, res, next) => {
         });
     }
 
-        //     VALUES($1, $2, $3, $4, $5, $6)\
-        //     RETURNING review"
-        const newReview = (await db.query(text, values)).rows[0]; 
-        console.log("new review: ", newReview)
-        res.send("review added!")
-    } catch (err) {
-        return next({
-            log: `reviewController.addReview: ${err}`,
-            message: { err: "Failed to add new user review" },
-        });
-    }
-
-}
+}  
 
 // update review
 
