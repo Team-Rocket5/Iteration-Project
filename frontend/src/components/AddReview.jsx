@@ -38,12 +38,12 @@ const AddReview =()=> {
         review: '',
         rating:'',
         date:'',
+        address:'',
+        reviewerName: '',
+        subject: '',
 
         //data point to be discussed
-        reviewerName: '',
-        address:'',
         picture: '',
-        subject: '',
     });
 
     //on Change
@@ -165,7 +165,6 @@ const AddReview =()=> {
                 <button size="medium" className="bg-yellow p-3 rounded absolute right-9" onClick={onSubmit}>Add Review</button>
             </CardActions>
         </Card>
-        
     )
 }
 // import Container from '../css/Container.jsx';
