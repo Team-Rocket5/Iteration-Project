@@ -24,6 +24,7 @@ const AddReview =()=> {
     const landlord = 'James Bond';
     const landlordID = 1;
     const reviewerID = 1;
+    
 
     //adding state to temporarily store form data
     const [checked, setChecked] = React.useState(true);
@@ -36,7 +37,7 @@ const AddReview =()=> {
 
     const [formData, setFormData] = useState({
         review: '',
-        //rating:'',
+        rating:'',
         date:'',
         address:'',
         reviewerName: '',
@@ -63,14 +64,15 @@ const AddReview =()=> {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const currentDate = event.toLocaleDateString(undefined, options)
     //hard coded rating
-    const rating = 5; 
+    //const rating = 5; 
     //on Submit
     const onSubmit = async (e) => {
         e.preventDefault();
         setDate(currentDate);
         console.log(date);
         console.log("On Submit for Review fired!")
-        const {review, subject, reviewerName, address} = formData;
+        const {review, subject, reviewerName, address, rating} = formData;
+        console.log('rating onSubmit', rating);
         const response = await axios.post('review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
         if(response.data) console.log('success');
         else console.log('error');
@@ -85,10 +87,13 @@ const AddReview =()=> {
                     <Typography gutterBottom variant="h5" component="div" className='pl-4  text-dark' sx={{width:'75%', color:'dark'}}>
                     {landlord}
                     </Typography>
-                    <Rating name="half-rating" defaultValue={0} precision={0.5} 
-                        onChange={(event, newValue) => {
-                        setValue(newValue);
-                        }}
+                    <Rating name="rating" value={formData.rating} precision={0.5} 
+                        onChange={onChange
+                            // (e, newValue) => {
+                            // setRating(Number(e.target.value));
+                            // console.log(rating);
+                            // }
+                        }
                     />
                 </div>
             <Box
