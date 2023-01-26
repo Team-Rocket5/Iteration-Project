@@ -17,6 +17,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import axios from 'axios';
 
 const AddReview =()=> {
     //temporary data, waiting for global state
@@ -33,17 +34,16 @@ const AddReview =()=> {
         console.log('rent_again', rent_again);
     };
 
-    
     const [formData, setFormData] = useState({
         review: '',
         rating:'',
         date:'',
+        address:'',
+        reviewerName: '',
+        subject: '',
 
         //data point to be discussed
-        reviewerName: '',
-        address:'',
         picture: '',
-        subject: '',
     });
 
     //on Change
@@ -67,9 +67,10 @@ const AddReview =()=> {
     const onSubmit = async (e) => {
         e.preventDefault();
         setDate(currentDate);
+        console.log(date);
         console.log("On Submit for Review fired!")
-        const {review, rating, subject, reviewerName, address, picture} = formData;
-        const response = await axios.post('http://localhost:3000/review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address, picture});
+        const {review, rating, subject, reviewerName, address} = formData;
+        const response = await axios.post('/review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
         if(response.data) console.log('success');
         else console.log('error');
         navigate('/landlord');
@@ -161,10 +162,9 @@ const AddReview =()=> {
             </CardContent>
             <CardActions>
                 <button className='ml-3'><AttachFileIcon fontSize='large'/></button>
-                <button size="medium" className="bg-yellow p-3 rounded absolute right-9">Add Review</button>
+                <button size="medium" className="bg-yellow p-3 rounded absolute right-9" onClick={onSubmit}>Add Review</button>
             </CardActions>
         </Card>
-        
     )
 }
 // import Container from '../css/Container.jsx';
