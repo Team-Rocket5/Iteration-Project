@@ -24,7 +24,6 @@ const AddReview =()=> {
     const landlord = 'James Bond';
     const landlordID = '123temp';
     const reviewerID = '123456' ;
-    //const picture = 'https://upload.wikimedia.org/wikipedia/commons/6/64/Old_room_%286811031135%29.jpg'
 
     //adding state to temporarily store form data
     const [checked, setChecked] = React.useState(true);
@@ -68,10 +67,10 @@ const AddReview =()=> {
     const onSubmit = async (e) => {
         e.preventDefault();
         setDate(currentDate);
+        console.log(date);
         console.log("On Submit for Review fired!")
-        const {review, rating, subject, reviewerName, address, picture} = formData;
-        //picture as stretch
-        const response = await axios.post('review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
+        const {review, rating, subject, reviewerName, address} = formData;
+        const response = await axios.post('/review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
         if(response.data) console.log('success');
         else console.log('error');
         navigate('/landlord');
