@@ -15,6 +15,9 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
+import { useFormControl } from '@mui/material/FormControl';
+import axios from 'axios';
+
 
 
 const SearchFilterOld =()=>{
@@ -22,62 +25,126 @@ const SearchFilterOld =()=>{
     const [citySearch, setCityActive] = useState(false);
     //const [disable, setDisable] = useState("false");
     const navigate = useNavigate();
+    console.log('nameActive changed', nameSearch);
+    console.log('cityActive changed', citySearch);
+    const nameActive=(e)=>{
+        setNameActive(true);
+        setCityActive(false);
+        document.getElementById('cityInput').value = '';
+        document.getElementById('neighborInput').value = '';
+    }
+
+    const cityActive=(e)=>{
+        setNameActive(false);
+        setCityActive(true);
+        document.getElementById('landlordInput').value = '';
+    }
+    
+
+    //get request logic below
+
+    const [formData, setFormData] = useState({
+        location: '',
+        neighborhood:'',
+        rating: 0,
+        name:'',
+    });
+
+    //onChange
+    const onChange = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        const {name, value} = e.target
+        setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+        }));
+    };
+
+    //on Submit
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        console.log("On Submit for Review fired!")
+        const {location, neighborhood, rating, name} = formData;
+        console.log('rating onSubmit', rating);
+        //  ?/search/landlord : /search/location
+        const response = await axios.get((nameActive ? '/search/landlord' : '/search/location'), {
+            params: {
+                location:location, 
+                neighborhood:neighborhood, 
+                rating:rating, 
+                name:name
+            }
+        });
+        //const response = await axios.get('', formData);
+        if(response.data) console.log(response.data, 'success');
+        else console.log('error');
+        //navigate('/landlord');
+    };
+
+    
 
     return (
         <Card sx={{ minWidth: 275, maxWidth: 800 }} className="relative pb-10">
             <CardContent>
-
-                <div className='p-2 mt-10 rounded text-center'>
-                    <FormControl sx={{ m: 1, minWidth: 120, width: '48%' }} >
-                        {/* <InputLabel id="demo-simple-select-helper-label">City</InputLabel> */}
-                        <Select
-                            id='selectCity'
-                            displayEmpty
-                            inputProps={{ 'aria-label': 'Without label' }}
-                            onChange={handleChange}
-                        >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={city[0]}>{city[0]}</MenuItem>
-                        <MenuItem value={city[1]}>{city[1]}</MenuItem>
-                        <MenuItem value={city[2]}>{city[2]}</MenuItem>
-                        <MenuItem value={city[3]}>{city[3]}</MenuItem>
-                        <MenuItem value={city[4]}>{city[4]}</MenuItem>
-                        </Select>
-                        <FormHelperText>Please select your city</FormHelperText>
-                    </FormControl>
-                    <FormControl sx={{ m: 1, minWidth: 120, width: '47%'}}>
-                        <Select
-                            value={neighborhood}
-                            onChange={handleChange}
-                            displayEmpty
-                            inputProps={{ 'aria-label': 'Without label' }}
-                        >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={neighborhood[0]}>{neighborhood[0]}</MenuItem>
-                        <MenuItem value={neighborhood[1]}>{neighborhood[1]}</MenuItem>
-                        <MenuItem value={neighborhood[2]}>{neighborhood[2]}</MenuItem>
-                        <MenuItem value={neighborhood[3]}>{neighborhood[3]}</MenuItem>
-                        <MenuItem value={neighborhood[4]}>{neighborhood[4]}</MenuItem>
-                        </Select>
-                        <FormHelperText>Please select your Neighborhood</FormHelperText>
-                    </FormControl>
+                <div className='ml-2 pt-2 mt-4'>
+                    {/* <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span> */}
+                    <button className='pt-3 pl-6 text-dark' onClick={cityActive}>Search By City and Neighborhood</button>
+                    <div className='pl-3 rounded text-center flex items-baseline ml-1'>
+                        <FormControl sx={{ mx: 1, pt:2, minWidth: 120, width: '40%' }} >
+                            {/* <InputLabel id="demo-simple-select-helper-label">City</InputLabel> */}
+                            <TextField 
+                                id="cityInput" 
+                                onFocus={cityActive} 
+                                disabled={nameSearch} 
+                                variant="outlined" 
+                                name='location'
+                                value={formData.location}
+                                required={true}
+                                onChange={onChange}
+                            />
+                            <FormHelperText>City Name</FormHelperText>
+                        </FormControl>
+                        <span className='px-8 text-slate-400 text-sm'>AND</span>
+                        <FormControl sx={{ m: 1, minWidth: 120, width: '40%'}}>
+                        <TextField  
+                            id="neighborInput" 
+                            variant="outlined"  
+                            onFocus={cityActive} 
+                            disabled={nameSearch}
+                            name='neighborhood'
+                            value={formData.neighborhood}
+                            required={true}
+                            onChange={onChange}
+                        />
+                            <FormHelperText> Neighborhood</FormHelperText>
+                        </FormControl>
+                    </div>
                 </div>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary" className="p-3 rounded text-center">
+                <Typography color="text.secondary" className="p-1 rounded text-center">
                 -or-
                 </Typography>
 
                 {/* <TextField fullWidth sx={{ m: 1, pl: 1, width: '97%' }} id="outlined-basic" label="Outlined" variant="outlined" /> */}
 
-                <FormControl  displayEmpty fullWidth sx={{ m: 1, pl:1.5, width: '96%' }} variant="outlined">
-                    {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
-                    <OutlinedInput
-                    />
-                    <FormHelperText id="outlined-weight-helper-text">Search By Name</FormHelperText>
-                </FormControl>
+                <div className='ml-2 p-2'>
+                    {/* <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span> */}
+                    <button className='p-4 pb-4 text-dark' onClick={nameActive}>Search By Landlord Name</button>
+                    <FormControl  fullWidth sx={{pl:2, width: '97%' }} variant="outlined">
+                        {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
+                        <TextField 
+                            id="landlordInput" 
+                            onFocus={nameActive} 
+                            disabled={citySearch} 
+                            variant="outlined" 
+                            name='name'
+                            value={formData.name}
+                            required={true}
+                            onChange={onChange}
+                        />
+                        <FormHelperText id="outlined-weight-helper-text">Enter Landlord Name</FormHelperText>
+                    </FormControl>
+                </div>
                 
 
             </CardContent>
@@ -92,7 +159,7 @@ const SearchFilterOld =()=>{
                         className='pl-4'
                     />
                 </div>
-                <button size="medium" className="bg-yellow p-3 rounded absolute right-9 px-10">Search</button>
+                <button size="medium" className="bg-yellow p-3 rounded absolute right-11 px-10" onClick={onSubmit}>Search</button>
             </CardActions>
             <div className="text-center pt-10 text-sm">
                 <span>Don't see the landlord you're looking for? </span>
