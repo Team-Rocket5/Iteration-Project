@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+//Pengbo/frontend-auth
+import { useDispatch, useSelector } from 'react-redux'
+import {userSignup, userLogin} from '../features/auth/authService'; 
+//
 import OauthLogin from '../../../backend/oauth.js'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
@@ -30,6 +34,8 @@ const style = {
   pb: 10,
 }
 
+
+
 function MyEmailHelperText() {
   const { focused } = useFormControl() || {}
 
@@ -46,6 +52,12 @@ function MyEmailHelperText() {
 
 
 function SignUp() {
+  //Pengbo/frontend-auth
+  //get state value from atuh object in Redux store 
+  const { loading, userInfo, error, success } = useSelector(
+  (state) => state.auth)
+  const dispatch = useDispatch()
+
   //set states for sign-up
   const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
@@ -56,6 +68,36 @@ function SignUp() {
     password2: '',
   })
 
+
+  //rediect after signing up
+
+  // useEffect(() => {
+  //   // redirect authenticated user to profile screen
+  //   if (userInfo) navigate('/user-profile')
+  //   // redirect user to login page if registration was successful
+  //   if (success) navigate('/login')
+  // }, [navigate, userInfo, success])
+
+  //submit via redux
+  
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    console.log('On Submit fired!')
+    if(formData.password !== formData.password2) alert('Hey, password should match!!')
+
+   
+    const { username, email, password } = formData
+
+    dispatch(userSignup({username, email, password})); 
+    
+    handleClose()
+    //navigate('/')
+  }
+//Pengbo/frontend-auth
+
+
+  
   //on Change
   const onChange = (e) => {
     e.preventDefault()
@@ -75,21 +117,21 @@ function SignUp() {
   };
   
   //on Submit
-  const onSubmit = async (e) => {
-    e.preventDefault()
+  // const onSubmit = async (e) => {
+  //   e.preventDefault()
 
-    console.log('On Submit fired!')
-    const { username, email, password } = formData
-    const response = await axios.post('user/signup', {
-      username,
-      email,
-      password,
-    })
-    if (response.data) console.log('success')
-    else console.log('error')
-    handleClose()
-    navigate('/')
-  }
+  //   console.log('On Submit fired!')
+  //   const { username, email, password } = formData
+  //   const response = await axios.post('user/signup', {
+  //     username,
+  //     email,
+  //     password,
+  //   })
+  //   if (response.data) console.log('success')
+  //   else console.log('error')
+  //   handleClose()
+  //   navigate('/')
+  // }
 
   //show and hide Password - UI
   const [showPassword, setShowPassword] = React.useState(false)
@@ -231,6 +273,55 @@ function SignUp() {
 }
 
 const Login = () => {
+
+  //***Pengbo/frontend-auth stuff
+  const { loading, userInfo, error, userToken, success } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
+
+  //once user is logged in navigate to search page
+  useEffect(() => {
+    if(error){
+      console.log('error with login')
+      navigate('/')
+      return;
+    }
+    if(success || userToken){
+      navigate('/home')
+    }
+    //consider reset dispatch function;
+  },[userToken, error, success])
+
+  //on Change
+  const onChange = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  //on Submit
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    console.log('Login Submit fired!')
+   
+    const {email, password } = formData
+
+    dispatch(userLogin({ email, password})); 
+    
+    handleClose()
+    //navigate('/')
+  }
+  //***Pengbo/frontend-auth stuff 
+
+
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => {
     setOpen(true)
@@ -274,7 +365,7 @@ const Login = () => {
             variant="outlined"
           >
             {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
-            <OutlinedInput id="LoginEmail" />
+            <OutlinedInput id="LoginEmail" name = "email" onChange={onChange} value = {formData.email}/>
             <FormHelperText id="outlined-weight-helper-text">
               Your Email
             </FormHelperText>
@@ -289,6 +380,9 @@ const Login = () => {
             <OutlinedInput
               id="loginPassword"
               type={showPassword ? 'text' : 'password'}
+              name = "password"
+              value = {formData.password}
+              onChange = {onChange}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -310,6 +404,7 @@ const Login = () => {
             size="medium"
             fullWidth
             className="bg-yellow px-40 rounded ml-6 py-4"
+            onClick={onSubmit}
           >
             Log In
           </button>
