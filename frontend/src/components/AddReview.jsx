@@ -37,8 +37,7 @@ const AddReview =()=> {
 
     const [formData, setFormData] = useState({
         review: '',
-        rating:'',
-        date:'',
+        rating: 0,
         address:'',
         reviewerName: '',
         subject: '',
@@ -59,16 +58,17 @@ const AddReview =()=> {
     };
 
     //get current date for review
-    const [date, setDate] = useState('');
+
     const event = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const currentDate = event.toLocaleDateString(undefined, options)
+    const date = event.toLocaleDateString(undefined, options)
+
     //hard coded rating
     //const rating = 5; 
     //on Submit
     const onSubmit = async (e) => {
         e.preventDefault();
-        setDate(currentDate);
+        //setDate(currentDate);
         console.log(date);
         console.log("On Submit for Review fired!")
         const {review, subject, reviewerName, address, rating} = formData;
@@ -81,11 +81,11 @@ const AddReview =()=> {
 
     
     return (
-        <Card sx={{ maxWidth: 560 }} className="relative pb-10">
+        <Card sx={{ maxWidth: 560 }} className="relative pb-5">
             <CardContent >
                 <div className='flex py-4 '>
-                    <Typography gutterBottom variant="h5" component="div" className='pl-4  text-dark' sx={{width:'75%', color:'dark'}}>
-                    {landlord}
+                    <Typography gutterBottom variant="h6" component="div" className='pl-4  text-dark' sx={{width:'75%', color:'dark'}}>
+                    Your Rating: 
                     </Typography>
                     <Rating name="rating" value={formData.rating} precision={0.5} 
                         onChange={onChange
@@ -124,18 +124,18 @@ const AddReview =()=> {
                             sx={{width:'40%'}}
                             name='address'
                             value={formData.address}
-                            required={true}
                             onChange={onChange}
                         />
-                        <div className='pl-4 text-dark'>
-                        Willing to Rent Again? <FormControlLabel 
-                            className='pl-2' 
-                            control={<Checkbox 
-                            name='rent_again'
-                            required={true}
-                            checked={checked}
-                            onChange={handleChange} />} 
-                        />
+                        <div className='pl-3 flex items-center justify-end text-dark'>    
+                            <span className='w-44 pr-4'>Willing to Rent Again?</span>
+                            <FormControlLabel 
+                                className='' 
+                                control={<Checkbox 
+                                name='rent_again'
+                                required={true}
+                                checked={checked}
+                                onChange={handleChange} />} 
+                            />
                         </div>
                     </div>
                     <FormControl fullWidth sx={{ m: 1}}>
@@ -147,7 +147,6 @@ const AddReview =()=> {
                             value={formData.subject}
                             required={true}
                             onChange={onChange}
-                            
                         />
                     </FormControl>
                     <FormControl fullWidth sx={{ m: 1 }}>
@@ -167,7 +166,14 @@ const AddReview =()=> {
             </Box>
             </CardContent>
             <CardActions>
-                <button className='ml-3'><AttachFileIcon fontSize='large'/></button>
+                <input type="file" className="block w-full text-sm text-slate-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-olive file:text-dark
+                    hover:file:bg-orange ml-4
+                "/>
+                <button className='ml-3'></button>
                 <button size="medium" className="bg-yellow p-3 rounded absolute right-9" onClick={onSubmit}>Add Review</button>
             </CardActions>
         </Card>
