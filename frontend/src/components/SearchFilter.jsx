@@ -16,6 +16,7 @@ import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
 import { useFormControl } from '@mui/material/FormControl';
+import axios from 'axios';
 
 
 
@@ -26,13 +27,11 @@ const SearchFilterOld =()=>{
     const navigate = useNavigate();
     console.log('nameActive changed', nameSearch);
     console.log('cityActive changed', citySearch);
-    const [ping, setPingCity] = useState('')
     const nameActive=(e)=>{
         setNameActive(true);
         setCityActive(false);
         document.getElementById('cityInput').value = '';
         document.getElementById('neighborInput').value = '';
-        setPingCity('<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>')
     }
 
     const cityActive=(e)=>{
@@ -42,20 +41,82 @@ const SearchFilterOld =()=>{
     }
     
 
+    //get request logic below
+
+    const [formData, setFormData] = useState({
+        location: '',
+        neighborhood:'',
+        rating: 0,
+        name:'',
+    });
+
+    //onChange
+    const onChange = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        const {name, value} = e.target
+        setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+        }));
+    };
+
+    //on Submit
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        console.log("On Submit for Review fired!")
+        const {location, neighborhood, rating, name} = formData;
+        console.log('rating onSubmit', rating);
+        //  ?/search/landlord : /search/location
+        const response = await axios.get((nameActive ? '/search/landlord' : '/search/location'), {
+            params: {
+                location:location, 
+                neighborhood:neighborhood, 
+                rating:rating, 
+                name:name
+            }
+        });
+        //const response = await axios.get('', formData);
+        if(response.data) console.log(response.data, 'success');
+        else console.log('error');
+        //navigate('/landlord');
+    };
+
+    
+
     return (
         <Card sx={{ minWidth: 275, maxWidth: 800 }} className="relative pb-10">
             <CardContent>
                 <div className='ml-2 pt-2 mt-4'>
+                    {/* <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span> */}
                     <button className='pt-3 pl-6 text-dark' onClick={cityActive}>Search By City and Neighborhood</button>
                     <div className='pl-3 rounded text-center flex items-baseline ml-1'>
                         <FormControl sx={{ mx: 1, pt:2, minWidth: 120, width: '40%' }} >
                             {/* <InputLabel id="demo-simple-select-helper-label">City</InputLabel> */}
-                            <TextField id="cityInput" onFocus={cityActive} disabled={nameSearch} variant="outlined" />
+                            <TextField 
+                                id="cityInput" 
+                                onFocus={cityActive} 
+                                disabled={nameSearch} 
+                                variant="outlined" 
+                                name='location'
+                                value={formData.location}
+                                required={true}
+                                onChange={onChange}
+                            />
                             <FormHelperText>City Name</FormHelperText>
                         </FormControl>
                         <span className='px-8 text-slate-400 text-sm'>AND</span>
                         <FormControl sx={{ m: 1, minWidth: 120, width: '40%'}}>
-                        <TextField  id="neighborInput" variant="outlined"  onFocus={cityActive} disabled={nameSearch}/>
+                        <TextField  
+                            id="neighborInput" 
+                            variant="outlined"  
+                            onFocus={cityActive} 
+                            disabled={nameSearch}
+                            name='neighborhood'
+                            value={formData.neighborhood}
+                            required={true}
+                            onChange={onChange}
+                        />
                             <FormHelperText> Neighborhood</FormHelperText>
                         </FormControl>
                     </div>
@@ -67,11 +128,20 @@ const SearchFilterOld =()=>{
                 {/* <TextField fullWidth sx={{ m: 1, pl: 1, width: '97%' }} id="outlined-basic" label="Outlined" variant="outlined" /> */}
 
                 <div className='ml-2 p-2'>
+                    {/* <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span> */}
                     <button className='p-4 pb-4 text-dark' onClick={nameActive}>Search By Landlord Name</button>
-                    {}
                     <FormControl  fullWidth sx={{pl:2, width: '97%' }} variant="outlined">
                         {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
-                        <TextField id="landlordInput" onFocus={nameActive} disabled={citySearch} variant="outlined" />
+                        <TextField 
+                            id="landlordInput" 
+                            onFocus={nameActive} 
+                            disabled={citySearch} 
+                            variant="outlined" 
+                            name='name'
+                            value={formData.name}
+                            required={true}
+                            onChange={onChange}
+                        />
                         <FormHelperText id="outlined-weight-helper-text">Enter Landlord Name</FormHelperText>
                     </FormControl>
                 </div>
@@ -83,15 +153,13 @@ const SearchFilterOld =()=>{
                     Filter By: 
                     <Rating
                         name="simple-controlled"
-                        value={1.5}
+                        value={formData.rating}
                         precision={0.5}
-                        onChange={(event, newValue) => {
-                        setValue(newValue);
-                        }}
+                        onChange={onChange}
                         className='pl-4'
                     />
                 </div>
-                <button size="medium" className="bg-yellow p-3 rounded absolute right-11 px-10">Search</button>
+                <button size="medium" className="bg-yellow p-3 rounded absolute right-11 px-10" onClick={onSubmit}>Search</button>
             </CardActions>
             <div className="text-center pt-10 text-sm">
                 <span>Don't see the landlord you're looking for? </span>
