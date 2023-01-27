@@ -20,7 +20,6 @@ import axios from 'axios';
 
 
 
-
 const SearchFilterOld =()=>{
     const [nameSearch, setNameActive] = useState(false);
     const [citySearch, setCityActive] = useState(false);
@@ -28,7 +27,6 @@ const SearchFilterOld =()=>{
     const navigate = useNavigate();
     console.log('nameActive changed', nameSearch);
     console.log('cityActive changed', citySearch);
-
     const nameActive=(e)=>{
         setNameActive(true);
         setCityActive(false);
@@ -41,6 +39,7 @@ const SearchFilterOld =()=>{
         setCityActive(true);
         document.getElementById('landlordInput').value = '';
     }
+    
 
     //get request logic below
 
@@ -83,19 +82,17 @@ const SearchFilterOld =()=>{
         //navigate('/landlord');
     };
 
+    
 
     return (
         <Card sx={{ minWidth: 275, maxWidth: 800 }} className="relative pb-10">
             <CardContent>
                 <div className='ml-2 pt-2 mt-4'>
-
                     {/* <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span> */}
-
                     <button className='pt-3 pl-6 text-dark' onClick={cityActive}>Search By City and Neighborhood</button>
                     <div className='pl-3 rounded text-center flex items-baseline ml-1'>
                         <FormControl sx={{ mx: 1, pt:2, minWidth: 120, width: '40%' }} >
                             {/* <InputLabel id="demo-simple-select-helper-label">City</InputLabel> */}
-
                             <TextField 
                                 id="cityInput" 
                                 onFocus={cityActive} 
@@ -106,11 +103,10 @@ const SearchFilterOld =()=>{
                                 required={true}
                                 onChange={onChange}
                             />
-
                             <FormHelperText>City Name</FormHelperText>
                         </FormControl>
                         <span className='px-8 text-slate-400 text-sm'>AND</span>
-
+                        <FormControl sx={{ m: 1, minWidth: 120, width: '40%'}}>
                         <TextField  
                             id="neighborInput" 
                             variant="outlined"  
@@ -121,7 +117,6 @@ const SearchFilterOld =()=>{
                             required={true}
                             onChange={onChange}
                         />
-
                             <FormHelperText> Neighborhood</FormHelperText>
                         </FormControl>
                     </div>
@@ -133,7 +128,6 @@ const SearchFilterOld =()=>{
                 {/* <TextField fullWidth sx={{ m: 1, pl: 1, width: '97%' }} id="outlined-basic" label="Outlined" variant="outlined" /> */}
 
                 <div className='ml-2 p-2'>
-
                     {/* <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span> */}
                     <button className='p-4 pb-4 text-dark' onClick={nameActive}>Search By Landlord Name</button>
                     <FormControl  fullWidth sx={{pl:2, width: '97%' }} variant="outlined">
@@ -166,7 +160,6 @@ const SearchFilterOld =()=>{
                     />
                 </div>
                 <button size="medium" className="bg-yellow p-3 rounded absolute right-11 px-10" onClick={onSubmit}>Search</button>
-
             </CardActions>
             <div className="text-center pt-10 text-sm">
                 <span>Don't see the landlord you're looking for? </span>
