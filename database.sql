@@ -30,7 +30,7 @@ CREATE TABLE public.reviews (
 	"landlord_id" serial NOT NULL,
 	"rating" serial NOT NULL,
 	"rent_again" BOOLEAN NOT NULL,
-	"date" DATE NOT NULL,
+	"date" varchar(50),
 	"address" varchar(255)
 	CONSTRAINT "reviews_pk" PRIMARY KEY ("id")
 ) WITH (
