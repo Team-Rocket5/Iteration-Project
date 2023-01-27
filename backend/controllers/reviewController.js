@@ -6,7 +6,10 @@ const reviewController = {};
 reviewController.getUserReviews = async (req, res, next)=> {
     try {
         const reviewerID = req.user.id; 
-        const text = "SELECT * FROM reviews WHERE reviewer_id = $1"
+        const text = "SELECT * FROM landlords\
+            INNER JOIN reviews\
+            ON reviews.landlord_id = landlords.id\
+            WHERE reviews.reviewer_id = $1;"
         const reviews = (await db.query(text, [reviewerID])).rows; 
         res.status(200).json(reviews); 
     }catch(err) {
