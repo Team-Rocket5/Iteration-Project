@@ -22,9 +22,9 @@ import axios from 'axios';
 const AddReview =()=> {
     //temporary data, waiting for global state
     const landlord = 'James Bond';
-    const landlordID = '123temp';
-    const reviewerID = '123456' ;
-    //const picture = 'https://upload.wikimedia.org/wikipedia/commons/6/64/Old_room_%286811031135%29.jpg'
+    const landlordID = 1;
+    const reviewerID = 1;
+    
 
     //adding state to temporarily store form data
     const [checked, setChecked] = React.useState(true);
@@ -39,12 +39,12 @@ const AddReview =()=> {
         review: '',
         rating:'',
         date:'',
+        address:'',
+        reviewerName: '',
+        subject: '',
 
         //data point to be discussed
-        reviewerName: '',
-        address:'',
         picture: '',
-        subject: '',
     });
 
     //on Change
@@ -63,18 +63,20 @@ const AddReview =()=> {
     const event = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const currentDate = event.toLocaleDateString(undefined, options)
-
+    //hard coded rating
+    //const rating = 5; 
     //on Submit
     const onSubmit = async (e) => {
         e.preventDefault();
         setDate(currentDate);
+        console.log(date);
         console.log("On Submit for Review fired!")
-        const {review, rating, subject, reviewerName, address, picture} = formData;
-        //picture as stretch
+        const {review, subject, reviewerName, address, rating} = formData;
+        console.log('rating onSubmit', rating);
         const response = await axios.post('review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
         if(response.data) console.log('success');
         else console.log('error');
-        navigate('/landlord');
+        //navigate('/landlord');
     };
 
     
@@ -85,10 +87,13 @@ const AddReview =()=> {
                     <Typography gutterBottom variant="h5" component="div" className='pl-4  text-dark' sx={{width:'75%', color:'dark'}}>
                     {landlord}
                     </Typography>
-                    <Rating name="half-rating" defaultValue={0} precision={0.5} 
-                        onChange={(event, newValue) => {
-                        setValue(newValue);
-                        }}
+                    <Rating name="rating" value={formData.rating} precision={0.5} 
+                        onChange={onChange
+                            // (e, newValue) => {
+                            // setRating(Number(e.target.value));
+                            // console.log(rating);
+                            // }
+                        }
                     />
                 </div>
             <Box
@@ -166,7 +171,6 @@ const AddReview =()=> {
                 <button size="medium" className="bg-yellow p-3 rounded absolute right-9" onClick={onSubmit}>Add Review</button>
             </CardActions>
         </Card>
-        
     )
 }
 // import Container from '../css/Container.jsx';

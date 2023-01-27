@@ -1,7 +1,9 @@
+import { Dashboard } from '@mui/icons-material';
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
 import Login from './LoginNew.jsx';
+
 
 const Navbar = () => {
 
@@ -33,6 +35,14 @@ const Navbar = () => {
                       Reviews
                     </h3>
                   </Link>
+                  <Link to='/dashboard'>
+                    <h3 className='text-gray-600 py-2 hover:text-dark-purple font-semibold text-2xl'>
+                      Dashboard
+                    </h3>
+                  </Link>
+                  {/* <div >
+                      <Dashboard />
+                  </div> */}
                 </>
               ) : (
                 <>
