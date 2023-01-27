@@ -46,7 +46,7 @@ const SearchFilterOld =()=>{
     const [formData, setFormData] = useState({
         location: '',
         neighborhood:'',
-        rating: 0,
+        rating: '',
         name:'',
     });
 
@@ -79,6 +79,11 @@ const SearchFilterOld =()=>{
         //const response = await axios.get('', formData);
         if(response.data) console.log(response.data, 'success');
         else console.log('error');
+
+        document.getElementById('landlordInput').value = '';
+        document.getElementById('cityInput').value = '';
+        document.getElementById('neighborInput').value = '';
+
         //navigate('/landlord');
     };
 
@@ -88,8 +93,9 @@ const SearchFilterOld =()=>{
         <Card sx={{ minWidth: 275, maxWidth: 800 }} className="relative pb-10">
             <CardContent>
                 <div className='ml-2 pt-2 mt-4'>
-                    {/* <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span> */}
-                    <button className='pt-3 pl-6 text-dark' onClick={cityActive}>Search By City and Neighborhood</button>
+                    <button className='pt-3 pl-6 text-dark peer underline decoration-orange decoration-4 underline-offset-4 hover:font-bold' onClick={cityActive}>Search By City and Neighborhood</button>
+                    <span class="animate-ping invisible peer-focus:visible absolute inline-flex h-3 w-3 mt-5 ml-2 rounded-full bg-orange opacity-95"></span>
+                    
                     <div className='pl-3 rounded text-center flex items-baseline ml-1'>
                         <FormControl sx={{ mx: 1, pt:2, minWidth: 120, width: '40%' }} >
                             {/* <InputLabel id="demo-simple-select-helper-label">City</InputLabel> */}
@@ -128,9 +134,10 @@ const SearchFilterOld =()=>{
           {/* <TextField fullWidth sx={{ m: 1, pl: 1, width: '97%' }} id="outlined-basic" label="Outlined" variant="outlined" /> */}
 
                 <div className='ml-2 p-2'>
-                    {/* <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span> */}
-                    <button className='p-4 pb-4 text-dark' onClick={nameActive}>Search By Landlord Name</button>
-                    <FormControl  fullWidth sx={{pl:2, width: '97%' }} variant="outlined">
+                    <button className='pl-4 pb-4 text-dark peer underline decoration-orange decoration-4 underline-offset-4 hover:font-bold' onClick={nameActive}>Search By Landlord Name</button>
+                    <span class="animate-ping invisible peer-focus:visible absolute inline-flex mt-2 ml-2 h-3 w-3 rounded-full bg-orange opacity-95"></span>
+                    
+                    <FormControl fullWidth sx={{pl:2, width: '97%' }} variant="outlined">
                         {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
                         <TextField 
                             id="landlordInput" 
@@ -152,7 +159,8 @@ const SearchFilterOld =()=>{
                 <div className='flex ml-10 text-dark'>
                     Filter By: 
                     <Rating
-                        name="simple-controlled"
+                        id="rating"
+                        name="rating"
                         value={formData.rating}
                         precision={0.5}
                         onChange={onChange}
