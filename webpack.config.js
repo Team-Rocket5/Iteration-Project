@@ -47,7 +47,7 @@ module.exports = {
     proxy: {
       //'/api': 'https://localhost:3000/',
       "/user": "http://localhost:3000",
-      "/landlord": "http://localhost:3000",
+      "/getLandlord": "http://localhost:3000",
       "/review": "http://localhost:3000",
       "/search": "http://localhost:3000",
     },

@@ -6,6 +6,7 @@ const landlordController = {};
 landlordController.getLandlordReviews = async (req, res) => {
     try {
     const landlordID = req.params.id; 
+    console.log(req.params.id);
     const text = "SELECT * FROM reviews WHERE landlord_id = $1"
     const reviews = (await db.query(text, [landlordID])).rows; 
     res.status(200).json(reviews); //send back reviews (in array format)
