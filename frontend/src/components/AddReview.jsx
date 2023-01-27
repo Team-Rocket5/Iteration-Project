@@ -81,7 +81,7 @@ const AddReview =()=> {
 
     
     return (
-        <Card sx={{ maxWidth: 560 }} className="relative pb-10">
+        <Card sx={{ maxWidth: 560 }} className="relative pb-5">
             <CardContent >
                 <div className='flex py-4 '>
                     <Typography gutterBottom variant="h5" component="div" className='pl-4  text-dark' sx={{width:'75%', color:'dark'}}>
@@ -124,18 +124,18 @@ const AddReview =()=> {
                             sx={{width:'40%'}}
                             name='address'
                             value={formData.address}
-                            required={true}
                             onChange={onChange}
                         />
-                        <div className='pl-4 text-dark'>
-                        Willing to Rent Again? <FormControlLabel 
-                            className='pl-2' 
-                            control={<Checkbox 
-                            name='rent_again'
-                            required={true}
-                            checked={checked}
-                            onChange={handleChange} />} 
-                        />
+                        <div className='pl-3 flex items-center justify-end text-dark'>    
+                            <span className='w-44 pr-4'>Willing to Rent Again?</span>
+                            <FormControlLabel 
+                                className='' 
+                                control={<Checkbox 
+                                name='rent_again'
+                                required={true}
+                                checked={checked}
+                                onChange={handleChange} />} 
+                            />
                         </div>
                     </div>
                     <FormControl fullWidth sx={{ m: 1}}>
@@ -147,7 +147,6 @@ const AddReview =()=> {
                             value={formData.subject}
                             required={true}
                             onChange={onChange}
-                            
                         />
                     </FormControl>
                     <FormControl fullWidth sx={{ m: 1 }}>
@@ -167,7 +166,14 @@ const AddReview =()=> {
             </Box>
             </CardContent>
             <CardActions>
-                <button className='ml-3'><AttachFileIcon fontSize='large'/></button>
+                <input type="file" className="block w-full text-sm text-slate-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-olive file:text-dark
+                    hover:file:bg-orange ml-4
+                "/>
+                <button className='ml-3'></button>
                 <button size="medium" className="bg-yellow p-3 rounded absolute right-9" onClick={onSubmit}>Add Review</button>
             </CardActions>
         </Card>

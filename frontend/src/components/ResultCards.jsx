@@ -23,7 +23,7 @@ return (
           <Typography variant='body2' color='text.secondary'>
             Neighborhood: Southwark
           </Typography>
-          <Rating name='half-rating' defaultValue={4.5} />
+          <Rating name='half-rating' defaultValue={4.5} precision={0.5} />
         </CardContent>
       </CardActionArea>
     </Card>
