@@ -26,7 +26,7 @@ userController.login = async (req, res, next) => {
 
         const token = generateToken({ id: user.id, username: user.username })
         res.cookie("ssid", token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
-        res.status(201).json({user: {id: user.id, email: user.email}, userToken: token})
+        res.status(201).json({user: {id: user.id, email: user.email, username: user.username}, userToken: token})
         //next();
       } else {
         res.json("email or password incorrect");
@@ -61,7 +61,7 @@ userController.login = async (req, res, next) => {
     const text = "INSERT INTO users(username,email,password) VALUES ($1,$2,$3)";
   
     const values = [username, email, hashedPassword];
-  
+    console.log("Values to be inserted: ", values)
     db.query(text, values)
       .then(_ => res.status(200).json("user signed up successfully"))
       .catch(err =>

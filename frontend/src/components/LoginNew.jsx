@@ -275,13 +275,26 @@ function SignUp() {
 const Login = () => {
 
   //***Pengbo/frontend-auth stuff
-  const { loading, userInfo, error } = useSelector((state) => state.auth)
+  const { loading, userInfo, error, userToken, success } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
+
+  //once user is logged in navigate to search page
+  useEffect(() => {
+    if(error){
+      console.log('error with login')
+      navigate('/')
+      return;
+    }
+    if(success || userToken){
+      navigate('/home')
+    }
+    //consider reset dispatch function;
+  },[userToken, error, success])
 
   //on Change
   const onChange = (e) => {
