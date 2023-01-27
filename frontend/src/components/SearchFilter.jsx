@@ -26,12 +26,13 @@ const SearchFilterOld =()=>{
     const navigate = useNavigate();
     console.log('nameActive changed', nameSearch);
     console.log('cityActive changed', citySearch);
-    
+    const [ping, setPingCity] = useState('')
     const nameActive=(e)=>{
         setNameActive(true);
         setCityActive(false);
         document.getElementById('cityInput').value = '';
         document.getElementById('neighborInput').value = '';
+        setPingCity('<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>')
     }
 
     const cityActive=(e)=>{
@@ -67,6 +68,7 @@ const SearchFilterOld =()=>{
 
                 <div className='ml-2 p-2'>
                     <button className='p-4 pb-4 text-dark' onClick={nameActive}>Search By Landlord Name</button>
+                    {}
                     <FormControl  fullWidth sx={{pl:2, width: '97%' }} variant="outlined">
                         {/* <InputLabel htmlFor="outlined-adornment-amount">Search By Name</InputLabel> */}
                         <TextField id="landlordInput" onFocus={nameActive} disabled={citySearch} variant="outlined" />
