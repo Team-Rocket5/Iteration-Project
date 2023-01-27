@@ -37,8 +37,7 @@ const AddReview =()=> {
 
     const [formData, setFormData] = useState({
         review: '',
-        rating:'',
-        date:'',
+        rating: 0,
         address:'',
         reviewerName: '',
         subject: '',
@@ -59,16 +58,17 @@ const AddReview =()=> {
     };
 
     //get current date for review
-    const [date, setDate] = useState('');
+
     const event = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const currentDate = event.toLocaleDateString(undefined, options)
+    const date = event.toLocaleDateString(undefined, options)
+
     //hard coded rating
     //const rating = 5; 
     //on Submit
     const onSubmit = async (e) => {
         e.preventDefault();
-        setDate(currentDate);
+        //setDate(currentDate);
         console.log(date);
         console.log("On Submit for Review fired!")
         const {review, subject, reviewerName, address, rating} = formData;
@@ -84,8 +84,8 @@ const AddReview =()=> {
         <Card sx={{ maxWidth: 560 }} className="relative pb-5">
             <CardContent >
                 <div className='flex py-4 '>
-                    <Typography gutterBottom variant="h5" component="div" className='pl-4  text-dark' sx={{width:'75%', color:'dark'}}>
-                    {landlord}
+                    <Typography gutterBottom variant="h6" component="div" className='pl-4  text-dark' sx={{width:'75%', color:'dark'}}>
+                    Your Rating: 
                     </Typography>
                     <Rating name="rating" value={formData.rating} precision={0.5} 
                         onChange={onChange

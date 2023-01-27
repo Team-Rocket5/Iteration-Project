@@ -7,13 +7,15 @@ import axios from 'axios';
 const LandlordPage = () => {
   const landlordID = 1;
   const [reviews, setReviews] = useState([]); 
+  const [landlord, setLandlord]= useState(""); 
 
   useEffect( () => {
     const fetchReviews = async () => {
       const response = await axios.get(`getLandlord/${landlordID}`); 
 
       console.log("response is: ", response.data); 
-      setReviews(response.data); 
+      setReviews((response.data).reverse()); 
+      setLandlord((response.data[0].name)); 
     }
     fetchReviews();
 
@@ -29,7 +31,7 @@ const LandlordPage = () => {
       <>
         <div className='w-[80%] flex flex-col mx-auto mt-40'>
           <h1 className='text-4xl mb-8 font-bold text-dark text-center'>
-            Reviews For ______________
+            Reviews For {landlord}
           </h1>
           {/* brief landlord info */}
           <div className=''></div>
