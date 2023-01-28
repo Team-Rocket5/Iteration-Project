@@ -31,24 +31,26 @@ const SearchFilterOld = () => {
   const nameActive = (e) => {
     setNameActive(true);
     setCityActive(false);
-    document.getElementById('cityInput').value = '';
-    document.getElementById('neighborInput').value = '';
+    // document.getElementById('cityInput').value = '';
+    // document.getElementById('neighborInput').value = '';
   };
 
   const cityActive = (e) => {
     setNameActive(false);
     setCityActive(true);
-    document.getElementById('landlordInput').value = '';
+    // document.getElementById('landlordInput').value = '';
   };
 
   //get request logic below
 
-  const [formData, setFormData] = useState({
+  const initialState = {
     location: '',
     neighborhood: '',
     rating: '',
     name: '',
-  });
+  }
+
+  const [formData, setFormData] = useState(initialState);
 
   //onChange
   const onChange = (e) => {
@@ -83,7 +85,8 @@ const SearchFilterOld = () => {
 
     if (response.data) {
       console.log(response.data, 'success');
-      setLandlord(response.data)
+      setLandlord(response.data);
+      setFormData(initialState);
     } else console.log('error');
 
 

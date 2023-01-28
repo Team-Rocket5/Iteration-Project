@@ -19,10 +19,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import axios from 'axios';
 
-const AddReview =({ID})=> {
+const AddReview =(props)=> {
     //temporary data, waiting for global state
     console.log("ID passed down type: ", typeof ID)
-    const landlordID = Number(ID); 
+    const landlordID = Number(props.ID); 
     console.log("Landlord in Add Reivew: ", landlordID); 
 
     //adding state to temporarily store form data
@@ -79,6 +79,8 @@ const AddReview =({ID})=> {
             console.log('success');
             setFormData(initialState);
             setOpen(true);
+            props.refetch();
+            props.render = true;
         } else {
         console.log('error');
         }
