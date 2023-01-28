@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import ResultCards from '../components/ResultCards.jsx';
 import SearchFilter from '../components/SearchFilter.jsx';
-
+import SearchContext from '../SearchContext.jsx';
 
 const HomePage = () => {
+  const [landlord] = useContext(SearchContext);
+
+
   return (
     <>
       <div className='w-[80%] flex flex-col mx-auto mt-40'>
@@ -14,13 +17,20 @@ const HomePage = () => {
           <SearchFilter />
         </div>
         <div className='flex flex-wrap mt-5 justify-center w-[70%] mx-auto'>
-          <ResultCards />
-          <ResultCards />
-          <ResultCards />
-          <ResultCards />
-          <ResultCards />
-          <ResultCards />
-          <ResultCards />
+            {
+              landlord.map((person)=>{
+                return (
+                  <ResultCards
+                    key={person.id}
+                    name={person.name}
+                    location={person.location}
+                    neighborhood={person.neighborhood}
+                    rating={person.rating}
+                    id={person.id}
+                  />
+                );
+              }
+            )}
         </div>
       </div>
     </>
