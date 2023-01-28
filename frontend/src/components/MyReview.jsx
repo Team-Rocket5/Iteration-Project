@@ -43,32 +43,29 @@ const link = `/landlord?ID=${landlord_id.toString()}`
                 <div >
                 <Rating name="read-only" value={rating} precision={0.5}  size="small" className='items-center' readOnly />
                 </div>
-                <Typography variant="p" className='text-sm font-bold pl-3'>{subject}</Typography>    
+                <Typography variant="p" className='text-sm font-bold pl-3'>{review}</Typography>    
               </div>
               <div className='overflow-y-auto max-h-20 ml-2 mt-1'>
-                <Typography variant="p" className='text-sm' flexWrap='row'>{review}</Typography> 
+                <Typography variant="p" className='text-sm' flexWrap='row'>{subject}</Typography> 
               </div>
 
               {/* <button className='mt-4 mx-2 px-5 text-sm bg-olive rounded'>Edit</button>
               <button className='mt-4 mx-2 px-4 text-sm bg-orange rounded'>Delete</button> */}
 
 
-            <Typography variant="p" className="text-sm font-bold pl-3">
-              {subject}
-            </Typography>
+            
+            <div>
+            <button className="mt-4 mx-2 px-5 text-sm bg-olive rounded">
+              Edit
+            </button>
+            <button className="mt-4 mx-2 px-4 text-sm bg-orange rounded">
+              Delete
+            </button>
+        </div>
           </div>
-          <div className="overflow-y-auto max-h-20 ml-2 mt-1">
-            <Typography variant="p" className="text-sm" flexWrap="row">
-              {review}
-            </Typography>
-          </div>
+
         
-        <button className="mt-4 mx-2 px-5 text-sm bg-olive rounded">
-          Edit
-        </button>
-        <button className="mt-4 mx-2 px-4 text-sm bg-orange rounded">
-          Delete
-        </button>
+        
       </Paper>
     </Box>
   )
