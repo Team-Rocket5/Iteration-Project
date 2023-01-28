@@ -3,13 +3,27 @@ import AddReview from '../components/AddReview.jsx'
 import ReviewDetails from '../components/ReviewDetails.jsx';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import axios from 'axios';
-import {useSearchParams} from 'react-router-dom';
+import {useSearchParams, useParams, useLocation} from 'react-router-dom';
+import { ContactSupportOutlined } from '@mui/icons-material';
 
 const LandlordPage = () => {
   //const landlordID = useParam()?
+  //This works 
   const [searchParams] = useSearchParams();
   console.log(searchParams);
-  const landlordID = searchParams.get("landlordID")
+  const landlordID = searchParams.get("ID")
+  //console.log("Type of ID: ", typeof landlordID)
+
+  //Not sure about this
+  // const params = useParams(); 
+  // ContactSupportOutlined.log("Params found: ", params.id)
+  // const landlordID = params.id;
+  
+  //This works too
+  // const location = useLocation(); 
+  // console.log("Location: ", location)
+  // const landlordID = location.state.landlordID; 
+
   const [reviews, setReviews] = useState([]); 
   const [landlord, setLandlord]= useState(""); 
 

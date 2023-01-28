@@ -15,10 +15,12 @@ const ResultCards = ({ id, name, location, neighborhood, rating }) => {
 
     const goToReview = ()=> {
     //e.preventDefault();
-    navigate({pathname: 'landlord',
-      search:createSearchParams({landlordID: id}).toString()
-      })
-
+    
+    //this works 
+    // navigate('/landlord', {
+    //     state: {landlordID: id}
+    //   })
+    navigate(`/landlord?ID=${id.toString()}`)
     };
 
     //alternatively create a link in card <Link to = `landlord/{id}`> 
