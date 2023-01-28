@@ -18,6 +18,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import InputAdornment from '@mui/material/InputAdornment'
 import IconButton from '@mui/material/IconButton'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 
 const style = {
   position: 'absolute',
@@ -68,6 +69,9 @@ function SignUp() {
     password2: '',
   })
 
+  //Notification functions
+
+const badLogin = () => toast("Username and/or password are incorrect!");
 
   //rediect after signing up
 
@@ -95,6 +99,7 @@ function SignUp() {
     //navigate('/')
   }
 //Pengbo/frontend-auth
+
 
 
   
@@ -286,6 +291,7 @@ const Login = () => {
   //once user is logged in navigate to search page
   useEffect(() => {
     if(error){
+      badLogin();
       console.log('error with login')
       navigate('/')
       return;
