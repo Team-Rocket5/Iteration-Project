@@ -6,29 +6,43 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import building from '../assets/building.jpg';
 import Rating from '@mui/material/Rating';
+import {useNavigate } from 'react-router-dom';
 
-const ResultCards = () => {
-return (
-  <div className='m-5'>
-    <Card sx={{ maxWidth: 345, width: 200 }}>
-      <CardActionArea>
-        <CardMedia component='img' image={building} alt='building' />
-        <CardContent>
-          <Typography gutterBottom variant='h6' component='div'>
-            Landlord: James Bond
-          </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            Address: 007 @ MI6 Headquarters
-          </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            Neighborhood: Southwark
-          </Typography>
-          <Rating name='half-rating' defaultValue={4.5} />
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  </div>
-);
-}
 
-export default ResultCards
+const ResultCards = ({ id, name, location, neighborhood, rating }) => {
+
+    const navigate = useNavigate();
+
+    // const goToReview = (id)=> {
+    // e.preventDefault();
+    // navigate('/')
+    //   //navigate(`landlord`, {state: })
+
+    // }
+
+    //alternatively create a link in card <Link to = `landlord/{id}`> 
+
+  return (
+    <div className='m-5' onClick={goToReview}>
+      <Card sx={{ maxWidth: 345, width: 200 }}>
+        <CardActionArea>
+          <CardMedia component='img' image={building} alt='building' />
+          <CardContent>
+            <Typography gutterBottom variant='h6' component='div'>
+              {name}
+            </Typography>
+            <Typography variant='body2' color='text.secondary'>
+              {location}
+            </Typography>
+            <Typography variant='body2' color='text.secondary'>
+              {neighborhood}
+            </Typography>
+            <Rating name='half-rating' defaultValue={rating} precision={0.5} />
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </div>
+  );
+};
+
+export default ResultCards;

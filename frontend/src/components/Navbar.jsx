@@ -1,13 +1,31 @@
 import { Dashboard } from '@mui/icons-material';
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
 import Login from './LoginNew.jsx';
+import { useDispatch, useSelector } from 'react-redux'
+import {userLogout} from '../features/auth/authSlice'; 
+
 
 
 const Navbar = () => {
 
-  const [isLoggedIn, setisLoggedIn] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {userToken} = useSelector((state) => state.auth)
+
+  const [isLoggedIn, setisLoggedIn] = useState(false);
+
+  useEffect(() => {
+    userToken ? setisLoggedIn(true) : setisLoggedIn(false) ;
+  }, [userToken])
+
+  const onLogout = () =>{
+    dispatch(userLogout())
+    navigate('/')
+  }
+
 
   return (
     <header className='w-[100%] fixed z-10 top-0'>
@@ -40,6 +58,11 @@ const Navbar = () => {
                       Dashboard
                     </h3>
                   </Link>
+                  <button onClick={onLogout}>
+                    <h3 className='text-gray-600 py-2 hover:text-dark-purple font-semibold text-2xl'>
+                      Logout
+                    </h3>
+                 </button>
                   {/* <div >
                       <Dashboard />
                   </div> */}
