@@ -10,41 +10,6 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import axios from 'axios';
 
-const cities = [
-  {
-    value: 'Houston',
-  },
-  {
-    value: 'Austin',
-  },
-  {
-    value: 'Marfa',
-  },
-  {
-    value: 'Terlingua',
-  },
-];
-
-const neighborhoods = [
-  {
-    value: 'Heights',
-  },
-  {
-    value: 'Museum District',
-  },
-  {
-    value: 'Midtown',
-  },
-  {
-    value: 'Downtown',
-  },
-  {
-    value: 'Uptown',
-  },
-];
-
-
-
 const AddLandlordNew = () => {
 
   const navigate = useNavigate();
@@ -113,32 +78,23 @@ const AddLandlordNew = () => {
               onChange={onChange}
             />
             <TextField
+              required
               id='outlined-select-city'
-              select
-              label='Select City'
+              label='City'
               value={formData.city}
               name='city'
               onChange={onChange}
             >
-              {cities.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.value}
-                </MenuItem>
-              ))}
+              
             </TextField>
             <TextField
+              required
               id='outlined-select-neighborhood'
-              select
-              label='Select Neighborhood'
+              label='Neighborhood'
               value={formData.neighborhood}
               name='neighborhood'
               onChange={onChange}
             >
-              {neighborhoods.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.value}
-                </MenuItem>
-              ))}
             </TextField>
             <button
               size='medium'
