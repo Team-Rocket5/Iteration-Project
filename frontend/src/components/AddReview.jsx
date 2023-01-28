@@ -19,12 +19,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import axios from 'axios';
 
-const AddReview =()=> {
+const AddReview =(props)=> {
     //temporary data, waiting for global state
-    const landlord = 'James Bond';
-    const landlordID = 1;
-    const reviewerID = 1;
-    
+    console.log("ID passed down type: ", typeof ID)
+    const landlordID = Number(props.ID); 
+    console.log("Landlord in Add Reivew: ", landlordID); 
 
     //adding state to temporarily store form data
     const [checked, setChecked] = React.useState(true);
@@ -35,7 +34,7 @@ const AddReview =()=> {
         console.log('rent_again', rent_again);
     };
 
-    const [formData, setFormData] = useState({
+    const initialState = {
         review: '',
         rating: 0,
         address:'',
@@ -44,7 +43,8 @@ const AddReview =()=> {
 
         //data point to be discussed
         picture: '',
-    });
+    }
+    const [formData, setFormData] = useState(initialState);
 
     //on Change
     const onChange = (e) => {
@@ -72,10 +72,18 @@ const AddReview =()=> {
         console.log(date);
         console.log("On Submit for Review fired!")
         const {review, subject, reviewerName, address, rating} = formData;
+        
         console.log('rating onSubmit', rating);
-        const response = await axios.post('review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
-        if(response.data) console.log('success');
-        else console.log('error');
+        const response = await axios.post('review', {landlordID, date, review, rent_again, rating, subject, reviewerName, address});
+        if(response.data){
+            console.log('success');
+            setFormData(initialState);
+            setOpen(true);
+            props.refetch();
+            props.render = true;
+        } else {
+        console.log('error');
+        }
         //navigate('/landlord');
     };
 

@@ -27,15 +27,19 @@ const LandlordPage = () => {
 
   const [reviews, setReviews] = useState([]); 
   const [landlord, setLandlord]= useState(""); 
+  const [render, setRender] = useState(false);
+
+  const fetchReviews = async () => {
+    const response = await axios.get(`getLandlord/${landlordID}`); 
+
+    console.log("response is: ", response.data); 
+    setReviews((response.data).reverse()); 
+    setLandlord((response.data[0].name)); 
+    setRender(false);
+  }
 
   useEffect( () => {
-    const fetchReviews = async () => {
-      const response = await axios.get(`getLandlord/${landlordID}`); 
-
-      console.log("response is: ", response.data); 
-      setReviews((response.data).reverse()); 
-      setLandlord((response.data[0].name)); 
-    }
+    
     fetchReviews();
 
   }, [])
@@ -61,7 +65,7 @@ const LandlordPage = () => {
             </div>
             {/* Add review */}
             <div className='pt-2'>
-              <AddReview />
+              <AddReview ID = {landlordID} refetch={fetchReviews} render={render}/>
             </div>
           </div>
           {/* Map and other info section */}

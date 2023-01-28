@@ -1,6 +1,7 @@
 //for displayingin Dashboard
 
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from "@mui/material/Typography";
@@ -10,8 +11,8 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 
 const myReview = ({content}) => {
 
-const {name, subject, review, rating, rent_again, date, address} = content; 
-  
+const {name, subject, review, rating, landlord_id, rent_again, date, address} = content; 
+const link = `/landlord?ID=${landlord_id.toString()}`
   return (
         <Box
           sx={{
@@ -27,9 +28,11 @@ const {name, subject, review, rating, rent_again, date, address} = content;
           <Paper >
             <div className='flex-col m-2 p-2' >
               <div>
+              <Link to={link} >
                 <div className='ml-2 mb-1 text-dark text-sm underline decoration-olive decoration-2 underline-offset-4 hover:font-bold'>
                   <h4>Landlord : {name} </h4>
                 </div>
+              </Link>
                 <AccountCircleOutlinedIcon fontSize='large' className='pl-1'/>
                 <Typography variant="p" className='text-xs pl-2'>Reviewed on {date}  |  Verified</Typography>
                 <VerifiedIcon fontSize='xs' className='pl-1' style={{ fill: '#0072ea' }} />      
