@@ -3,7 +3,7 @@ const db = require("../models");
 const landlordController = {}; 
 
 // get reviews about a particular landloard 
-landlordController.getLandlordReviews = async (req, res) => {
+landlordController.getLandlordReviews = async (req, res, next) => {
     try {
     const landlordID = req.params.id; 
     console.log(req.params.id);

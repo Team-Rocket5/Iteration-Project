@@ -60,7 +60,7 @@ const LandlordPage = () => {
             </div>
             {/* Add review */}
             <div className='pt-2'>
-              <AddReview />
+              <AddReview ID = {landlordID}/>
             </div>
           </div>
           {/* Map and other info section */}
