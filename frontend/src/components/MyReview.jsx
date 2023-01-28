@@ -1,5 +1,4 @@
 //for displayingin Dashboard
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -9,7 +8,8 @@ import Rating from '@mui/material/Rating';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import VerifiedIcon from '@mui/icons-material/Verified';
 
-const myReview = ({content}) => {
+
+const myReview = ({ content }) => {
 
 const {name, subject, review, rating, landlord_id, rent_again, date, address} = content; 
 const link = `/landlord?ID=${landlord_id.toString()}`
@@ -48,13 +48,30 @@ const link = `/landlord?ID=${landlord_id.toString()}`
               <div className='overflow-y-auto max-h-20 ml-2 mt-1'>
                 <Typography variant="p" className='text-sm' flexWrap='row'>{review}</Typography> 
               </div>
-              <button className='mt-4 mx-2 px-5 text-sm bg-olive rounded'>Edit</button>
-              <button className='mt-4 mx-2 px-4 text-sm bg-orange rounded'>Delete</button>
-            </div>
-          </Paper>
-          
-        </Box>
-      );
-    }
-  
-  export default myReview;
+
+              {/* <button className='mt-4 mx-2 px-5 text-sm bg-olive rounded'>Edit</button>
+              <button className='mt-4 mx-2 px-4 text-sm bg-orange rounded'>Delete</button> */}
+
+
+            <Typography variant="p" className="text-sm font-bold pl-3">
+              {subject}
+            </Typography>
+          </div>
+          <div className="overflow-y-auto max-h-20 ml-2 mt-1">
+            <Typography variant="p" className="text-sm" flexWrap="row">
+              {review}
+            </Typography>
+          </div>
+        
+        <button className="mt-4 mx-2 px-5 text-sm bg-olive rounded">
+          Edit
+        </button>
+        <button className="mt-4 mx-2 px-4 text-sm bg-orange rounded">
+          Delete
+        </button>
+      </Paper>
+    </Box>
+  )
+}
+
+export default myReview
