@@ -75,7 +75,7 @@ const AddLandlordNew = () => {
     const response = await axios.post('landlord', sentData);
     if (response.data) console.log(response.data);
     else console.log('error');
-    navigate('/home');
+    navigate('/landlord');
   };
 
 

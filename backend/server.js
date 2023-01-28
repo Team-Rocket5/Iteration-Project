@@ -31,7 +31,7 @@ app.use(cors())
 app.use("/search", searchRouter)
 
 //to create new landlord + access reviews of an landlord
-app.use("/landlord", landlordRouter); 
+app.use("/getLandlord", landlordRouter); 
 
 //user login/signup/logout
 app.use("/user", userRouter);
