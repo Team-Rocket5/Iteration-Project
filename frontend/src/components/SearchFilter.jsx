@@ -30,19 +30,15 @@ const SearchFilterOld =()=>{
     const nameActive=(e)=>{
         setNameActive(true);
         setCityActive(false);
-        document.getElementById('cityInput').value = '';
-        document.getElementById('neighborInput').value = '';
     }
 
     const cityActive=(e)=>{
         setNameActive(false);
         setCityActive(true);
-        document.getElementById('landlordInput').value = '';
     }
     
 
     //get request logic below
-
     const [formData, setFormData] = useState({
         location: '',
         neighborhood:'',

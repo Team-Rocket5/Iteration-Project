@@ -18,6 +18,8 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import axios from 'axios';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 const AddReview =()=> {
     //temporary data, waiting for global state
@@ -35,7 +37,19 @@ const AddReview =()=> {
         console.log('rent_again', rent_again);
     };
 
-    const [formData, setFormData] = useState({
+    // success snackbar alert
+    const [open, setOpen] = React.useState(false);
+    // close the snackbar
+    const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
+  
+
+    const initialState = {
         review: '',
         rating: 0,
         address:'',
@@ -44,7 +58,8 @@ const AddReview =()=> {
 
         //data point to be discussed
         picture: '',
-    });
+    }
+    const [formData, setFormData] = useState(initialState);
 
     //on Change
     const onChange = (e) => {
@@ -74,8 +89,13 @@ const AddReview =()=> {
         const {review, subject, reviewerName, address, rating} = formData;
         console.log('rating onSubmit', rating);
         const response = await axios.post('review', {landlordID, reviewerID, date, review, rent_again, rating, subject, reviewerName, address});
-        if(response.data) console.log('success');
-        else console.log('error');
+        if(response.data){
+            console.log('success');
+            setFormData(initialState);
+            setOpen(true);
+        } else {
+        console.log('error');
+        }
         //navigate('/landlord');
     };
 
@@ -83,11 +103,13 @@ const AddReview =()=> {
     return (
         <Card sx={{ maxWidth: 560 }} className="relative pb-5">
             <CardContent >
-                <div className='flex py-4 '>
+                <div className='flex py-2 '>
                     <Typography gutterBottom variant="h6" component="div" className='pl-4  text-dark' sx={{width:'75%', color:'dark'}}>
                     Your Rating: 
                     </Typography>
-                    <Rating name="rating" value={formData.rating} precision={0.5} 
+                    <Rating name="rating" value={formData.rating} 
+                        precision={0.5} 
+                        defaultValue={2.5}
                         onChange={onChange
                             // (e, newValue) => {
                             // setRating(Number(e.target.value));
@@ -174,6 +196,16 @@ const AddReview =()=> {
                     hover:file:bg-orange ml-4
                 "/>
                 <button className='ml-3'></button>
+                
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ 
+                        width: '100%', 
+                        ml:70,
+                        }} >
+                    Review Added Successfully!
+                    </Alert>
+                </Snackbar>
+                
                 <button size="medium" className="bg-yellow p-3 rounded absolute right-9" onClick={onSubmit}>Add Review</button>
             </CardActions>
         </Card>
