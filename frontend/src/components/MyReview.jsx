@@ -27,7 +27,9 @@ const {name, subject, review, rating, rent_again, date, address} = content;
           <Paper >
             <div className='flex-col m-2 p-2' >
               <div>
-                <h4>Landlord : {name} </h4>
+                <div className='ml-2 mb-1 text-dark text-sm underline decoration-olive decoration-2 underline-offset-4 hover:font-bold'>
+                  <h4>Landlord : {name} </h4>
+                </div>
                 <AccountCircleOutlinedIcon fontSize='large' className='pl-1'/>
                 <Typography variant="p" className='text-xs pl-2'>Reviewed on {date}  |  Verified</Typography>
                 <VerifiedIcon fontSize='xs' className='pl-1' style={{ fill: '#0072ea' }} />      
@@ -41,6 +43,8 @@ const {name, subject, review, rating, rent_again, date, address} = content;
               <div className='overflow-y-auto max-h-20 ml-2 mt-1'>
                 <Typography variant="p" className='text-sm' flexWrap='row'>{review}</Typography> 
               </div>
+              <button className='mt-3 mx-2 px-5 text-sm bg-olive rounded'>Edit</button>
+              <button className='mt-3 mx-2 px-4 text-sm bg-orange rounded'>Delete</button>
             </div>
           </Paper>
           

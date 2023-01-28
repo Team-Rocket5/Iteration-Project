@@ -5,6 +5,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import axios from 'axios';
 import {useSearchParams, useParams, useLocation} from 'react-router-dom';
 import { ContactSupportOutlined } from '@mui/icons-material';
+import map from '../assets/Map.png';
 
 const LandlordPage = () => {
   //const landlordID = useParam()?
@@ -64,7 +65,7 @@ const LandlordPage = () => {
             </div>
           </div>
           {/* Map and other info section */}
-          <div className='leaflet-container'>
+          {/* <div className='leaflet-container'>
             <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
               <TileLayer
                 attribution='&copy; <a href="https://web.archive.org/web/20211121204128/http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -76,7 +77,15 @@ const LandlordPage = () => {
                 </Popup>
               </Marker>
             </MapContainer>
+          </div> */}
+          <div classname='h-4/5'>
+            <img
+            src={map}
+            alt='apartment picture'
+            className='relavtive w-[100%] mt-24'
+          />
           </div>
+
         </div>
       </>
     );
