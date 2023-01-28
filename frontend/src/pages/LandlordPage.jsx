@@ -3,10 +3,13 @@ import AddReview from '../components/AddReview.jsx'
 import ReviewDetails from '../components/ReviewDetails.jsx';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import axios from 'axios';
+import {useSearchParams} from 'react-router-dom';
 
 const LandlordPage = () => {
   //const landlordID = useParam()?
-  const landlordID = 1;
+  const [searchParams] = useSearchParams();
+  console.log(searchParams);
+  const landlordID = searchParams.get("landlordID")
   const [reviews, setReviews] = useState([]); 
   const [landlord, setLandlord]= useState(""); 
 

@@ -6,19 +6,20 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import building from '../assets/building.jpg';
 import Rating from '@mui/material/Rating';
-import {useNavigate } from 'react-router-dom';
+import {createSearchParams, useNavigate } from 'react-router-dom';
 
 
 const ResultCards = ({ id, name, location, neighborhood, rating }) => {
 
     const navigate = useNavigate();
 
-    // const goToReview = (id)=> {
-    // e.preventDefault();
-    // navigate('/')
-    //   //navigate(`landlord`, {state: })
+    const goToReview = ()=> {
+    //e.preventDefault();
+    navigate({pathname: 'landlord',
+      search:createSearchParams({landlordID: id}).toString()
+      })
 
-    // }
+    };
 
     //alternatively create a link in card <Link to = `landlord/{id}`> 
 
