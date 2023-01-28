@@ -5,6 +5,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import axios from 'axios';
 
 const LandlordPage = () => {
+  //const landlordID = useParam()?
   const landlordID = 1;
   const [reviews, setReviews] = useState([]); 
   const [landlord, setLandlord]= useState(""); 
