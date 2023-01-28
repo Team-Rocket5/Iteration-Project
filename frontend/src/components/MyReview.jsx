@@ -29,10 +29,8 @@ const link = `/landlord?ID=${landlord_id.toString()}`
             <div className='flex-col m-2 p-2' >
               <div>
               <Link to={link} >
-                <div>
-                  <h4>
-                    Landlord: {name}
-                  </h4>
+                <div className='ml-2 mb-1 text-dark text-sm underline decoration-olive decoration-2 underline-offset-4 hover:font-bold'>
+                  <h4>Landlord : {name} </h4>
                 </div>
               </Link>
                 <AccountCircleOutlinedIcon fontSize='large' className='pl-1'/>
