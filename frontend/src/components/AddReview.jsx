@@ -18,10 +18,10 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import axios from 'axios';
+import { PropaneSharp } from '@mui/icons-material';
 
 const AddReview =(props)=> {
     //temporary data, waiting for global state
-    console.log("ID passed down type: ", typeof ID)
     const landlordID = Number(props.ID); 
     console.log("Landlord in Add Reivew: ", landlordID); 
 
@@ -78,9 +78,10 @@ const AddReview =(props)=> {
         if(response.data){
             console.log('success');
             setFormData(initialState);
-            setOpen(true);
-            props.refetch();
-            props.render = true;
+            //setOpen(true);
+            props.newReview(); 
+            // props.refetch();
+            // props.render = true;
         } else {
         console.log('error');
         }

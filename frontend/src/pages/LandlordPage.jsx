@@ -10,7 +10,6 @@ const LandlordPage = () => {
   //const landlordID = useParam()?
   //This works 
   const [searchParams] = useSearchParams();
-  console.log(searchParams);
   const landlordID = searchParams.get("ID")
   //console.log("Type of ID: ", typeof landlordID)
 
@@ -26,12 +25,17 @@ const LandlordPage = () => {
 
   const [reviews, setReviews] = useState([]); 
   const [landlord, setLandlord]= useState(""); 
-  const [render, setRender] = useState(false);
+  const [render, setRender] = useState(false)
+
+  const newReview = (e) => {
+    //e.preventDefault();
+    setRender((prev)=>!prev); 
+  }
 
   const fetchReviews = async () => {
     const response = await axios.get(`getLandlord/${landlordID}`); 
 
-    console.log("response is: ", response.data); 
+    console.log("fetch reviews fired!! ", response.data); 
     setReviews((response.data).reverse()); 
     setLandlord((response.data[0].name)); 
     setRender(false);
@@ -41,7 +45,7 @@ const LandlordPage = () => {
     
     fetchReviews();
 
-  }, [])
+  }, [render])
 
   if (!reviews) return <>Loading ... </>
   else {
@@ -64,7 +68,7 @@ const LandlordPage = () => {
             </div>
             {/* Add review */}
             <div className='pt-2'>
-              <AddReview ID = {landlordID} refetch={fetchReviews} render={render}/>
+              <AddReview ID = {landlordID} refetch={fetchReviews} newReview={newReview}/>
             </div>
           </div>
           {/* Map and other info section */}
