@@ -24,16 +24,17 @@ reviewController.getUserReviews = async (req, res, next)=> {
 reviewController.addReview = async (req, res, next) => {
     try {  
          
-        //const {landlordID, review, rent_again, rating, date} = req.body; //NTF: send the landlord ID in request please!
-        
-        
+        const {landlordID, review, rent_again, rating, date, reviewerName, address, subject} = req.body; //NTF: send the landlord ID in request please!
+        console.log("landlordID type in controller:",  typeof landlordID); 
+        //console.log("Inside add Review controller!")
         //temporary: grab reviewerID and name from request
-        
-        //const reviewerID = req.user.id;//attainable through verification
-        console.log("Request is: ", req.body)
-        const {landlordID, review, rent_again, rating, date, reviewerID, reviewerName, address, subject} = req.body;
+        const ratingNum = Number(rating)
+
+        const reviewerID = req.user.id;//attainable through verification
+        console.log("RevierID  ", typeof reviewerID); 
+        //const {landlordID, review, rent_again, rating, date, reviewerID, reviewerName, address, subject} = req.body;
        
-        const values = [landlordID, reviewerID, review, rent_again, rating, date, reviewerName, address, subject]
+        const values = [landlordID, reviewerID, review, rent_again, ratingNum, date, reviewerName, address, subject]
 
         //TODO: if address is provided (optional for reviewer) and new, add it to the properties table; 
 
@@ -44,13 +45,14 @@ reviewController.addReview = async (req, res, next) => {
         //     "INSERT INTO reviews(landlord_id, reviewer_id, review, rent_again, rating, date)\
         //     VALUES($1, $2, $3, $4, $5, $6)\
         //     RETURNING review"
-
+     
         await db.query(text, values); 
         //console.log("new review: ", newReview)
 
         // const newReview = (await db.query(text, values)).rows[0]; 
         // console.log("new review: ", newReview)
 
+        console.log("data inserted")
         res.send("review added!")
     } catch (err) {
         return next({
