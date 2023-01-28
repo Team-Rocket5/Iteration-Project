@@ -10,8 +10,8 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 
 const myReview = ({content}) => {
 
-const {name, subject, review, rating, rent_again, date, address} = content; 
-  
+const {name, subject, review, rating, landlord_id, rent_again, date, address} = content; 
+ 
   return (
         <Box
           sx={{
