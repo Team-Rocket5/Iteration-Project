@@ -36,7 +36,7 @@ const LandlordPage = () => {
   const fetchReviews = async () => {
     const response = await axios.get(`getLandlord/${landlordID}`); 
 
-    console.log("fetch reviews fired!! ", response.data); 
+    //console.log("fetch reviews fired!! ", response.data); 
     setReviews((response.data).reverse()); 
     setLandlord((response.data[0].name)); 
     //setRender(false);
@@ -69,7 +69,7 @@ const LandlordPage = () => {
             </div>
             {/* Add review */}
             <div className='pt-2'>
-              <AddReview ID = {landlordID} refetch={fetchReviews} newReview={newReview}/>
+              <AddReview ID = {landlordID}  newReview={newReview}/>
             </div>
           </div>
           {/* Map and other info section */}
