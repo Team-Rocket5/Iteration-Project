@@ -71,7 +71,7 @@ const SearchFilterOld = () => {
     console.log('rating onSubmit', rating);
     //  ?/search/landlord : /search/location
     const response = await axios.get(
-      nameActive ? '/search/landlord' : '/search/location',
+      nameSearch ? 'search/landlord' : 'search/location',
       {
         params: {
           location: location,
